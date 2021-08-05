@@ -15,6 +15,8 @@
     <style type="text/css">
         .container-fluid {
             background-color: #439B3B;
+            height:100vh;
+            width:100%;
         }
         .row.app-name {
             width: 15rem;
@@ -61,7 +63,7 @@
             border-radius: 20px;
         }
 
-        .row.back-submit {
+        .row.submit {
              /* border: 2px solid black; */
             padding-top: 2rem;
             padding-bottom: 2rem;
@@ -85,6 +87,11 @@
             color: white;
             font-size: 2.5rem;
             font-family: 'Titillium Web', sans-serif;
+        }
+
+        .row.back {
+            position: absolute;
+            bottom: 2rem;
         }
     </style>
 
@@ -113,7 +120,7 @@
             <div class="col-sm-12 input"></div>
         </div>
 
-        <div class="row back-submit">
+        <div class="row submit">
             <div class="col-sm-12 submit">
                 <div class="row submit-btn" onclick="submit()">
                     <div class="col-sm-12 submit-btn">
@@ -121,6 +128,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row back">
             <span class="material-icons" onclick="back()" style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>
 
         </div>

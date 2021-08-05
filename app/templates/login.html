@@ -62,15 +62,19 @@
         }
 
         .row.back-submit {
+             /* border: 2px solid black; */
             padding-top: 2rem;
             padding-bottom: 2rem;
+            /* display: inline; */
         }
 
         .row.submit-btn {
             /* border: 2px solid black; */
             width: 20rem;
             height: 4rem;
-            margin: auto;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 0;
             text-align: center;
             /* padding-top: 2rem; */
             background-color: #006400;
@@ -110,17 +114,15 @@
         </div>
 
         <div class="row back-submit">
-            <div class="col-sm-1 back" onclick="back()">
-                <span class="material-icons" style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>
-            </div>
-
-            <div class="col-sm-11 submit">
+            <div class="col-sm-12 submit">
                 <div class="row submit-btn" onclick="submit()">
                     <div class="col-sm-12 submit-btn">
                         <p>Submit</p>
                     </div>
                 </div>
             </div>
+            <span class="material-icons" onclick="back()" style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>
+
         </div>
     </div>
 </body>

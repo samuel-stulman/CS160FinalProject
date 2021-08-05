@@ -93,19 +93,19 @@
                 <p>Bringing Communities Closer, One Task At a Time</p>
             </div>
         </div>
-        <div class="row button">
+        <div class="row button" onclick="login()">
             <div class="col-sm-12 button">
                 <p>Login</p>
             </div>
         </div>
-        <div class="row button">
+        <div class="row button" onclick="register()">
             <div class="col-sm-12 button">
                 <p>Register</p>
             </div>
         </div>
 
         <div class="row learn">
-            <div class="col-sm-12 learn">
+            <div class="col-sm-12 learn" onclick="about()">
                 <p>Learn More About Us</p>
             </div>
         </div>
@@ -117,5 +117,16 @@
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat');
 
+    function login() {
+        window.location.href = "/app/login"
+    }
+
+    function register() {
+        window.location.href = "/app/register"
+    }
+
+    function about() {
+        window.location.href = "/app/about"
+    }
 </script>
 </html>

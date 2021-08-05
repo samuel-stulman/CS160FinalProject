@@ -34,3 +34,6 @@ def todo(request):
 
 def help(request):
     return render(request, 'help.html')
+
+def register(request):
+    return render(request, 'register.html')

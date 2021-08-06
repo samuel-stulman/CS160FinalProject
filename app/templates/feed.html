@@ -4,17 +4,286 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Login</title>
+    <title>Home Feed</title>
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style type="text/css">
+body {
+            background-color: #439B3B;
+            color: white;
+            font-family: 'Titillium Web';
+        }
 
+        .outer-wrapper {
+            height: 100vh;
+            width: 100%;
+        }
+
+        .top-nav-bar {
+            width: 100%;
+            display: block;
+            position: fixed;
+            font-family: 'Quando';
+        }
+
+        .feed-container {
+            height: 100%;
+            width: 96%;
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+
+        #photo-upload {
+            height: 20vh;
+            width: 35vw;
+            background-color: #c4c4c4;
+            display: block;
+            line-height: 20vh;
+            text-align: center;
+            font-size: 24px;
+            color: white;
+            float: left;
+            margin-right: 1em;
+        }
+
+        .textinput-container {
+            float: right;
+            width: 60%;
+        }
+
+        .textinput-container-long {
+            float: right;
+            width: 100%;
+        }
+
+        .textinput-label {
+            background-color: #006400;
+            color: white;
+            border-color: transparent;
+        }
+
+        .textinput {
+            background-color:#006400;
+            border-color: #006400;
+            color: white;
+        }
+        
+
+        #blog-heading {
+            width: 50vw;
+            float: right;
+            background-color: #006400;
+            border-color: #006400;
+            color: white;
+            
+        }
+
+        .dropdown-select {
+            height: 50px;
+            width: 200px;
+            margin-left: 1em;
+        }
+
+        #tag-list {
+            height: 20vh;
+            width: 100%;
+        }
+
+        #blog-heading::placeholder {
+            color: #f4f4f4;
+        }
+
+        .task-item {
+            height: 50px;
+            width: 100%;
+            font-size: 24px;
+            float: left;
+            line-height: 50px;
+            padding-left: 20px;
+            padding-right: 10px;
+            border-radius: 5px;
+            background-color: #006400;
+            border-color: transparent;
+            margin-top: 10px;
+        }
+
+        .submit-btn {
+            width: 385px;
+            height: 74px;
+            border-radius: 15px;
+            margin: 0 auto;
+            background-color: #006400;
+            border-color: transparent;
+            display: block;
+            font-size: 32px;
+        }
+        .submit-btn:hover {
+            background-color: #006400;
+            border-color: transparent;
+        }
+
+        #new-subtask-btn {
+            float: right;
+            height: 50px;
+            line-height: 50px;
+        }
+        
+        #community-select {
+            margin: 0 auto;
+            display: block;
+            height: 50px;
+            width: 150px;
+            background-color: #006400;
+            color: white;
+            font-family: 'Titillium Web';
+            border-radius: 5px;
+        }
+
+        .post-container {
+            height: 50px;
+            line-height: 50px;
+            padding-left: 15px;
+            font-size: 24px;
+            width: 100%;
+            border-radius: 15px;
+            background-color: #006400;
+            padding-right: 15px;
+        }
     </style>
 
 </head>
 <body>
-   Home Feed
+    <div class="outer-wrapper">
+        <div class="top-nav-bar">
+            <div style="color: white; font-size: 2rem; width: 33%; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left">
+                Auxilium
+            </div>
+            <div style="width: 33%; float: left;">
+                <select id="community-select" class="form-select" aria-label="Default select example">
+                    <option selected>Communities</option>
+                    <option value="1">Berkeley, CA</option>
+                    <option value="2">UC Berkeley</option>
+                    <option value="3">San Francisco, CA</option>
+                </select>
+            </div>
+        
+
+        </div>
+        <br/><br/><br/>
+        <h1 style="margin-left: 2%; color: white;">Feed</h1>
+        <br/>
+        <div class="feed-container">
+            <div class="feed-post">
+                <p style="float: left;">(10:19 pm) Sara S. posted:</p>
+                <br/>
+                <br/>
+                <div class="post-container">
+                    <p style="float: left">Blog Post #24: Weekly Newsletter for Berkeley, CA</p>
+                    <div style="float: right;font-size: 36px;">
+                        <span class="material-icons material-icons-outlined">
+                            arrow_forward
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="feed-post">
+                <p style="float: left;">(9:29 pm) Paul G. posted:</p>
+                <p style="float: right;">12pm - 3pm | Within 5 miles</p>
+                <br/>
+                <br/>
+                <div class="post-container">
+                    <p style="float: left">Task: Need help with assembling bookshelf</p>
+                    <div style="float: right;font-size: 36px;">
+                        <span class="material-icons material-icons-outlined">
+                            arrow_forward
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="feed-post">
+                <p style="float: left;">(7:45 pm) John D. posted:</p>
+                <p style="float: right;">12pm - 3pm | Within 5 miles</p>
+                <br/>
+                <br/>
+                <div class="post-container">
+                    <p style="float: left">Task: assistance required on CS Homework</p>
+                    <div style="float: right;font-size: 36px;">
+                        <span class="material-icons material-icons-outlined">
+                            arrow_forward
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="feed-post">
+                <p style="float: left;">(7:30 pm) George C. posted:</p>
+                <p style="float: right;">Aug 10, 2022 | Within 5 miles</p>
+                <br/>
+                <br/>
+                <div class="post-container">
+                    <p style="float: left">Task: Need help moving furnitures</p>
+                    <div style="float: right;font-size: 36px;">
+                        <span class="material-icons material-icons-outlined">
+                            arrow_forward
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="feed-post">
+                <p style="float: left;">(6:10 pm) Jeff B. posted:</p>
+                <p style="float: right;">Tomorrow | Within 5 miles</p>
+                <br/>
+                <br/>
+                <div class="post-container">
+                    <p style="float: left">Task: Helpers needed for community event!</p>
+                    <div style="float: right;font-size: 36px;">
+                        <span class="material-icons material-icons-outlined">
+                            arrow_forward
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="feed-post">
+                <p style="float: left;">(4:30 pm) Victoria A. posted:</p>
+                <p style="float: right;">Aug. 15, 2022 10am - 3pm | Within 5 miles</p>
+                <br/>
+                <br/>
+                <div class="post-container">
+                    <p style="float: left">Task: Assistance needed with gardening</p>
+                    <div style="float: right;font-size: 36px;">
+                        <span class="material-icons material-icons-outlined">
+                            arrow_forward
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="feed-post">
+                <p style="float: left;">(3:10 pm) Megan D. posted:</p>
+                <p style="float: right;">Tomorrow | Within 5 miles</p>
+                <br/>
+                <br/>
+                <div class="post-container">
+                    <p style="float: left">Task: Need help with  math homework</p>
+                    <div style="float: right;font-size: 36px;">
+                        <span class="material-icons material-icons-outlined">
+                            arrow_forward
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
 </body>
 <script>
     var uid = Date.now() % 10000; // Use this to ID the user

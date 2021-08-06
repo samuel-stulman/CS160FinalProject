@@ -1,0 +1,149 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+        .container-fluid {
+            background-color: #439B3B;
+            height:100vh;
+            width:100%;
+        }
+        .row.app-name {
+            width: 15rem;
+            /* border: 2px solid black; */
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 0px;
+            
+        }
+
+        .row.app-name p {
+            color: white;
+            font-size: 2rem;
+            font-family: 'Quando', serif;
+        }
+
+        .row.page-name {
+            width: 100%;
+            /* border: 2px solid black; */
+            padding-bottom: 0px;
+            padding-left: 2rem;
+        }
+
+        .row.page-name p {
+            color: white;
+            font-size: 2.5rem;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .row.input {
+            width: 40rem;
+            height: 20vh;
+            margin-left: auto;
+            margin-right: auto;
+            /* padding-bottom: 2rem; */
+        }
+
+        .col-sm-12.input {
+            width: 100%;
+            /* border: 2px solid black; */
+            padding-right: 5rem;
+        }
+
+        .row.input p {
+            color: white;
+            font-size: 2.5rem;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .col-sm-12.input {
+            background-color: #006400;
+            height: 5rem;
+            border-radius: 20px;
+        }
+
+        .row.back-forward {
+            position: absolute;
+            bottom: 2rem;
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row app-name">
+            <div class="col-sm-12 app-name">
+                <p>Auxilium</p>
+            </div>
+        </div>
+
+        <div class="row page-name">
+            <div class="col-sm-5">
+                <p>Community</p>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-5 text-right" style="padding-right: 2rem;">
+                <p>3 of 4</p>
+            </div>
+        </div>
+
+        <div class="row input">
+            <p>Community #1:</p>
+            <div class="col-sm-12 text-right input">
+                <span class="material-icons icon" style="color: white; font-size: 5rem; position: absolute;">arrow_drop_down</span>
+            </div>
+        </div>
+
+        <div class="row input">
+            <p>Community #2:</p>
+            <div class="col-sm-12 text-right input">
+                <span class="material-icons icon" style="color: white; font-size: 5rem; position: absolute;">arrow_drop_down</span>
+            </div>
+        </div>
+
+        <div class="row input">
+            <p>Community #3:</p>
+            <div class="col-sm-12 text-right input">
+                <span class="material-icons icon" style="color: white; font-size: 5rem; position: absolute;">arrow_drop_down</span>
+            </div>
+        </div>
+
+        <div class="row back-forward">
+            <div class="col-sm-5 back">
+                <span class="material-icons" onclick="back()" style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-5 text-right forward">
+                <span class="material-icons" onclick="forward()" style="color: white; font-size: 4rem; padding-right: 2rem; padding-top: 1rem;">arrow_forward_ios</span>
+            </div>
+           
+        </div>
+    </div>
+</body>
+<script>
+    var uid = Date.now() % 10000; // Use this to ID the user
+    var socket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat');
+
+    function back() {
+        window.location.href = "/app/register2"
+    }
+
+    function forward() {
+        window.location.href = "/app/register4"
+    }
+
+</script>
+</html>

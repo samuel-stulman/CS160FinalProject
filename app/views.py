@@ -35,5 +35,14 @@ def todo(request):
 def help(request):
     return render(request, 'help.html')
 
-def register(request):
-    return render(request, 'register.html')
+def register1(request):
+    return render(request, 'register1.html')
+
+def register2(request):
+    return render(request, 'register2.html')
+
+def register3(request):
+    return render(request, 'register3.html')
+
+def register4(request):
+    return render(request, 'register4.html')

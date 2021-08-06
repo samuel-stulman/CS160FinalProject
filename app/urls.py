@@ -15,5 +15,8 @@ urlpatterns = [
     path('settings', views.settings, name='settings'),
     path('profile', views.profile, name='profile'),
     path('todo', views.todo, name='todo'),
-    path('register', views.register, name='register'),
+    path('register1', views.register1, name='register1'),
+    path('register2', views.register2, name='register2'),
+    path('register3', views.register3, name='register3'),
+    path('register4', views.register4, name='register4'),
 ]

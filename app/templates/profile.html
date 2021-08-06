@@ -2,19 +2,92 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style type="text/css">
 
     </style>
 
 </head>
-<body>
-   Profile Page
+
+<body style="background-color:#439B3B;">
+    <div style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%">
+        Auxilium
+    </div>
+
+    <div style="color: white; font-size: 48px; font-family: 'Titillium Web'; margin-left: 2%; margin-top: 1%">
+        Profile
+    </div>
+    <div style="margin-left: 2%; margin-right: -20%; float:left">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Guy_Pearce_Cannes_2012_%28revised%29.jpg"
+            width="70%" height="70%">
+    </div>
+
+    <div style="margin-right: 55%; float:right">
+        <div style="font-family:'Titillium Web'; font-size: 40px; color: white">
+            Name: Charles Montgomery
+        </div>
+
+    </div>
+    <br><br></br></br>
+    <div style="margin-right: 6%; float:right; width: 75%">
+        <div style="font-family:'Titillium Web'; font-size: 40px; color: white">
+            Bio: Hey there! My name is Charles and I'm living at 4238 Wilbur St. with my 2 dogs. When I'm not reviewing
+            the latest restaurants, you can find me hiking in the Berkeley Fire Trails or trying to learn how to paint.
+            Reach out if you ever need help with building anything, need food recommendations, or just want to chat :)
+        </div>
+
+    </div>
+
+
+    <div style="margin-top: 17%; margin-left: 2%; font-family: 'Titillium Web'; color: white; font-size: 48px">
+        Skills:
+    </div>
+
+    <div style="margin-left: 2%">
+        <div style="background-color: #006400; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
+            Cooking
+        </div>
+        <div style="background-color: #006400; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
+            Building
+        </div>
+        <div style="background-color: #006400; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
+            Painting
+        </div>
+        <div style="background-color: #006400; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
+            Hiking
+        </div>
+    </div>
+
+    <div style="margin-top: 7%; margin-left: 2%; font-family: 'Titillium Web'; color: white; font-size: 48px">
+        Communities:
+    </div>
+
+    <div style="margin-left: 2%">
+        <div style="background-color: #006400; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
+            Berkeley, CA
+        </div>
+        <div style="background-color: #006400; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
+            Pizza-Lovers
+        </div>
+        <div style="background-color: #006400; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
+            Cali Foodies
+        </div>
+        <div style="background-color: #006400; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
+            NorCal >>>
+        </div>
+    </div>
+
 </body>
 <script>
     var uid = Date.now() % 10000; // Use this to ID the user
@@ -22,4 +95,5 @@
         'ws://' + window.location.host + '/ws/chat');
 
 </script>
+
 </html>

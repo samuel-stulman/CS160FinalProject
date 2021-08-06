@@ -20,6 +20,22 @@
     var uid = Date.now() % 10000; // Use this to ID the user
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat');
-
+        var longitude = -73.961452;
+    
+    var latitude = 40.714224; // Hard coded values
+    const apikey = 'AIzaSyCja2930U2Z83-qQdaHxK2qrh9f770jpq4'
+    // Get user's geolocation long lat
+    navigator.geolocation.getCurrentPosition(pos => {
+        console.log('client longitude ' + pos.coords.longitude)
+        console.log('client latitude ' + pos.coords.latitude)
+        longitude = pos.coords.longitude
+        latitude = pos.coords.latitude
+    });        
+    // One - Off
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apikey}`).then(resp => resp.json()).then(data => {
+        console.log(data) 
+        // Process location
+    })
+    console.log(resp)
 </script>
 </html>

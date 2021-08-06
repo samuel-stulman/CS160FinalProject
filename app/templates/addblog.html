@@ -4,22 +4,195 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Login</title>
+    <title>New Blog</title>
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style type="text/css">
+        body {
+            background-color: #439B3B;
+            color: white;
+            font-family: 'Titillium Web';
+        }
 
+        .outer-wrapper {
+            height: 100vh;
+            width: 100%;
+        }
+
+        .top-nav-bar {
+            width: 100%;
+            display: block;
+            position: fixed;
+            font-family: 'Quando';
+        }
+
+        .form-container {
+            height: 100%;
+            width: 96%;
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+
+        #photo-upload {
+            height: 20vh;
+            width: 35vw;
+            background-color: #c4c4c4;
+            display: block;
+            line-height: 20vh;
+            text-align: center;
+            font-size: 24px;
+            color: white;
+            float: left;
+            margin-right: 1em;
+        }
+
+        .textinput-container {
+            float: right;
+            width: 60%;
+        }
+
+        .textinput-container-long {
+            float: right;
+            width: 100%;
+        }
+
+        .textinput-label {
+            background-color: #006400;
+            color: white;
+            border-color: transparent;
+        }
+
+        .textinput {
+            background-color:#006400;
+            border-color: #006400;
+            color: white;
+        }
+        
+
+        #blog-heading {
+            width: 50vw;
+            float: right;
+            background-color: #006400;
+            border-color: #006400;
+            color: white;
+            
+        }
+
+        .dropdown-select {
+            height: 50px;
+            width: 200px;
+            margin-left: 1em;
+        }
+
+        #tag-list {
+            height: 20vh;
+            width: 100%;
+        }
+
+        #blog-heading::placeholder {
+            color: #f4f4f4;
+        }
+
+        .list-item {
+            height: 40px;
+            display: block;
+            float: left;
+            line-height: 40px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 50px;
+            background-color: #006400;
+            border-color: transparent;
+            margin-left: 1em;
+            margin-top: 10px;
+        }
+
+        .submit-btn {
+            width: 385px;
+            height: 74px;
+            border-radius: 15px;
+            margin: 0 auto;
+            background-color: #006400;
+            border-color: transparent;
+            display: block;
+            font-size: 32px;
+        }
+        .submit-btn:hover {
+
+            background-color: #006400;
+            border-color: transparent;
+        }
     </style>
 
 </head>
 <body>
-   add blog post
+   <div class="outer-wrapper">
+        <div class="top-nav-bar">
+            <div style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left">
+                Auxilium
+            </div>
+        </div>
+        <br/><br/><br/>
+        <h1 style="margin-left: 2%; color: white;">Add Blog Post</h1>
+        <div class="form-container">
+            <div id="photo-upload">
+                Photo
+            </div>
+            <div class="input-group input-group-lg textinput-container">
+                <div class="input-group-prepend">
+                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Blog Post Heading: </span>
+                </div>
+                <input type="text" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <div class="input-group input-group-lg textinput-container-long">
+                <div class="input-group-prepend">
+                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Add Text: </span>
+                </div>
+                <input type="text" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <br/>            <br/>            <br/>
+            <h2 style="float: left;">Community Tags</h2>
+            <br/>
+            <br/>
+            <div id="tag-list">
+            </div>
+            <button type="button" class="btn btn-primary submit-btn">Submit</button>
+        </div>
+
+   </div>
+
 </body>
 <script>
     var uid = Date.now() % 10000; // Use this to ID the user
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat');
+
+    const COMMUNITY_TAGS = [   
+        'Berkeley, CA',
+        'UC Berkeley',
+        'Food Shelter',
+        'San Francisco, CA',
+        'Bay Area',
+        'San Jose, CA',
+        'Palo Alto, CA',
+    ]
+
+    // Populate the selector with tags
+    COMMUNITY_TAGS.forEach(el => {
+        let new_item = '<div class="list-item">' +
+                   el +
+                '</div>'
+        $('#tag-list').append(new_item)
+    })
+
+
 
 </script>
 </html>

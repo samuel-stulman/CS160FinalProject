@@ -2,19 +2,163 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <title>Todo</title>
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style type="text/css">
+        body {
+            background-color: #439B3B;
+            font-family: 'Titillium Web', sans-serif;
+        }
 
+        .row.app-name p {
+            color: white;
+            font-size: 2rem;
+            font-family: 'Quando', serif;
+        }
+
+        .about-text {
+            height: 50%;
+            width: 50%;
+            background-color: aliceblue;
+            text-align: center;
+        }
+
+        .dropdown {
+            background-color: #006400;
+            width: 50%;
+            text-align: center;
+            font-size: 40px;
+            font-family: 'Titillium Web';
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            float: left;
+        }
+
+        .icon {
+            margin: 4px 4px;
+            left: 95%;
+            bottom: 0px;
+            position: absolute;
+            font-size: 40px;
+        }
+
+        #back-icon {
+            position: fixed;
+            bottom: 0px;
+        }
+
+        h2 {
+            font-size: 40px;
+            margin-left: 20px;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        .date{
+            width: 50%;
+            font-family: 'Titillium Web';
+            color: white;
+        }
     </style>
 
 </head>
+
 <body>
-   Todo Page
+    <div class="container-fluid">
+        <div class="row app-name">
+            <div class="col-sm-12 app-name">
+                <p>Auxilium</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <h1>To-do Tasks</h1>
+        </div>
+        <br>
+        <div class="taks1">
+            <div class="row justify-content-around">
+                <div class="date row">
+                    <h1>Monday, Aug 2</h1>
+                </div>
+            </div>
+            <div class = "row justify-content-around">
+                <div class="dropdown row justify-content-center">
+                    <h2>Task: Need Help with Assembling Bookshelf</h2>
+                </div>
+        </div>
+                
+        <div class="taks2">
+            <div class="row justify-content-around">
+                <div class="date row">
+                    <h1>Wednsday, Aug 4</h1>
+                </div>
+            </div>
+            <div class = "row justify-content-around">
+                <div class="dropdown row justify-content-center">
+                    <h2>Task: Need Help with Assembling Bookshelf</h2>
+                </div>
+            </div>
+            <div class = "row justify-content-around">
+                <div class="dropdown row justify-content-center">
+                    <h2>Task: Provide HW help on Math</h2>
+                </div>
+            </div>
+        </div>
+        <div class="taks3">
+            <div class="row justify-content-around">
+                <div class="date row">
+                    <h1>Thursday, Aug 5</h1>
+                </div>
+            </div>
+            <div class = "row justify-content-around">
+                <div class="dropdown row justify-content-center">
+                    <h2>Task: Meet with team</h2>
+                </div>
+            </div>
+            <div class = "row justify-content-around">
+                <div class="dropdown row justify-content-center">
+                    <h2>Task: Finish up the project</h2>
+                </div>
+            </div>
+            <div class = "row justify-content-around">
+                <div class="dropdown row justify-content-center">
+                    <h2>Task: Watch YouTube for few hours</h2>
+                </div>
+            </div>
+            <div class = "row justify-content-around">
+                <div class="dropdown row justify-content-center">
+                    <h2>Task: Watch Dream's Minecraft Manhunt</h2>
+                </div>
+            </div>
+            <div class = "row justify-content-around">
+                <div class="dropdown row justify-content-center">
+                    <h2>Task: Make improvements on projects</h2>
+                </div>
+            </div>
+            <div class = "row justify-content-around">
+                <div class="dropdown row justify-content-center">
+                    <h2>Task: Make improvements on projects</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="back-icon">
+        <span class="material-icons" onclick="back()"
+            style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>
+    </div>
+</body>
 </body>
 <script>
     var uid = Date.now() % 10000; // Use this to ID the user
@@ -22,4 +166,5 @@
         'ws://' + window.location.host + '/ws/chat');
 
 </script>
+
 </html>

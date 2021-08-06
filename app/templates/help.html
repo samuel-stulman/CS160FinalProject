@@ -2,19 +2,45 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style type="text/css">
 
     </style>
 
 </head>
-<body>
-   help Page
+
+<body style="background-color:#439B3B;">
+    <div style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%">
+        Auxilium
+    </div>
+
+    <div style="color: white; font-size: 48px; font-family: 'Titillium Web'; margin-left: 2%; margin-top: 1%">
+        Help
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 10%">
+        <div style="background-color: #006400; width: 50%; text-align: center; font-size: 40px; font-family: 'Titillium Web'; color: white; border-radius: 20px;">
+            Support Line: +1 (650) 123 - 4567
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 7%">
+        <div style="background-color: #006400; width: 50%; text-align: center; font-size: 40px; font-family: 'Titillium Web'; color: white; border-radius: 20px;">
+            Support Email: support@auxilium.com
+        </div>
+    </div>
+
 </body>
 <script>
     var uid = Date.now() % 10000; // Use this to ID the user
@@ -22,4 +48,5 @@
         'ws://' + window.location.host + '/ws/chat');
 
 </script>
+
 </html>

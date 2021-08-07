@@ -46,3 +46,6 @@ def register3(request):
 
 def register4(request):
     return render(request, 'register4.html')
+
+def chat(request):
+    return render(request, 'chat.html')

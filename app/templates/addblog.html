@@ -71,7 +71,17 @@
         .textinput {
             background-color:#006400;
             border-color: #006400;
+            color: white; 
+        }
+
+        .textinput:focus {
+            background-color:#006400;
+            border-color: #006400;
             color: white;
+        }
+
+        .textinput::placeholder {
+            color: red;
         }
         
 
@@ -148,7 +158,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Blog Post Heading: </span>
                 </div>
-                <input type="text" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                <input type="text" placeholder="test" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             <div class="input-group input-group-lg textinput-container-long">

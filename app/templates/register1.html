@@ -170,7 +170,8 @@
         var username = document.getElementById("usernameInput").value
         var password = document.getElementById("passwordInput").value
         var checkbox = document.getElementById("checkInput")
-        if (checkbox.checked && username !='' && password != '') {
+        const items = {...localStorage}
+        if (checkbox.checked && username !='' && password != '' && !(username in items)) {
             // localStorage.setItem("username", JSON.stringify(username))
             // localStorage.setItem("password", password)
             localStorage.setItem('username', username)
@@ -200,6 +201,10 @@
                     }
                 }
                 
+            }
+
+            if (username in items) {
+                document.getElementById("user").style.color = "red";
             }
         }
     }

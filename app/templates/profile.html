@@ -11,89 +11,330 @@
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap"rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style type="text/css">
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    
+    <style type="text/css">
+        .overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+            opacity: 0;
+        }
+        .overlay:target {
+            visibility: visible;
+            opacity: 1;
+        }
+        .popup {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 50%;
+            position: relative;
+            transition: all 5s ease-in-out;
+        }
+        .popup h2 {
+            margin-top: 0;
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+        .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 40px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+        }
+        .popup .content {
+            max-height: 30%;
+            overflow: auto;
+            font-size: 40px;
+        }
+        @media screen and (max-width: 700px) {
+            .box {
+                width: 70%;
+            }
+            .popup {
+                width: 70%;
+            }
+        }
+        .link {
+            /* font-family: Titillium Web;  */
+            color: #009aeb; 
+            text-align: center;
+        }
+
+        .container-fluid {
+            background-color: #439B3B;
+            height:100vh;
+            width:100%;
+        }
+        .row.app-name {
+            width: 100%;
+            /* border: 2px solid black; */
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 0px;
+            margin-bottom: 0;
+            
+        }
+
+        .row.app-name p {
+            color: white;
+            font-size: 2rem;
+            font-family: 'Quando', serif;
+        }
+
+        .nav-burger {
+            width: 100%;
+            /* float:right; 
+            margin-left: 95%; 
+            margin-top: -2%; */
+            /* border: 2px solid black; */
+        }
+
+        .row.page-name {
+            width: 100%;
+            /* border: 2px solid black; */
+            padding-bottom: 0px;
+            padding-left: 2rem;
+        }
+
+        .row.page-name p {
+            color: white;
+            font-size: 2.5rem;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .row.name {
+
+        }
+
+        .row.name p {
+            font-family:'Titillium Web'; 
+            font-size: 40px; 
+            color: white;
+        }
+
+        .row.bio {
+            background-color: #2F472F; 
+            border-radius: 20px; 
+            margin-left: 10%;
+            margin-right: 10%;
+            margin-bottom: 2rem;
+            /* height: 33vh; */
+        }
+
+        .row.bio p {
+            font-family:'Titillium Web'; 
+            font-size: 2rem; 
+            color: white;
+        }
+
+        .row.skills {
+            margin-bottom: 2rem;
+            margin-left: 2rem;
+            margin-right: 2rem;
+        }
+
+        .col-sm-2.skill {
+            background-color: #2F472F; 
+            border-radius: 20px; 
+            margin-right: 1rem;
+            margin-top: auto;
+            margin-bottom: auto;
+            
+        }
+
+        .col-sm-2.skill p {
+            font-size: 1.5rem; 
+            font-family: 'Titillium Web'; 
+            color: white; 
+        }
+
+        .row.communities {
+            margin-bottom: 2rem;
+            margin-left: 2rem;
+            margin-right: 2rem;
+            margin-top: auto;
+            margin-bottom: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .col-sm-2.community{
+            background-color: #2F472F; 
+            border-radius: 20px; 
+            margin-right: 1rem;
+        }
+
+        .col-sm-2.community p {
+            font-size: 1.5rem; 
+            font-family: 'Titillium Web'; 
+            color: white; 
+        }
     </style>
 
 </head>
 
-<body style="background-color:#439B3B;">
-    <div style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%">
-        Auxilium
+<body>
+    <div class="container-fluid">
+        <div class="row app-name">
+            <div class="col-sm-6 text-left app-name" style="padding-left: 2rem;">
+                <p>Auxilium</p>
+            </div>
+
+            <div class="col-sm-6 text-right nav-burger">
+                <a href="#" data-toggle="modal" data-target="#staticBackdrop">
+                    <div class="row">
+                        <div class="col-sm-12 text-right">
+                            <span class="material-icons" style="color: white; font-size: 50px;">menu</span>
+                        </div>
+                    </div>
+                </a>
+    
+                <div class ="modal fade" id="staticBackdrop" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <a class="close" href="">&times;</a>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/feed">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Home Feed</p>
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/newtask">
+                                       <p class="link" style="color: #009aeb; font-family: Titillium Web;">Request Help</p>
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/newblog">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Add Blog Post</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/todo">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">To-Do Tasks</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/profile">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Profile</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/privacy">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Privacy</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/settings">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Settings</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/help">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Contact Us</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/about">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Help and About</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row page-name">
+            <div class="col-sm-12">
+                <p id="title">Profile</p>
+            </div>
+        </div>
+
+        <div class="row name">
+            <div class="col-sm-12 text-center">
+                <p id="name">Name: </p>
+            </div>
+        </div>
+
+        <div class="row bio">
+            <div class="col-sm-12">
+                <p id="bio">Bio: </p>
+            </div>
+        </div>
+
+        <div class="row skills">
+            <div class="col-sm-3" style="font-family: 'Titillium Web'; color: white; font-size: 2rem;">
+                <p>Skills:</p>
+            </div>
+            <div class="col-sm-2 text-center skill">
+                <p id="skill1"></p>
+            </div>
+            <div class="col-sm-2 text-center skill">
+                <p id="skill2"></p>
+            </div>
+            <div class="col-sm-2 text-center skill">
+                <p id="skill3"></p>
+            </div>
+        </div>
+
+        <div class="row communities">
+            <div class="col-sm-4" style="font-family: 'Titillium Web'; color: white; font-size: 2rem;">
+                <p>Communities:</p>
+            </div>
+            <div class="col-sm-2 text-center community">
+                <p id="community1"></p>
+            </div>
+            <div class="col-sm-2 text-center community">
+                <p id="community2"></p>
+            </div>
+            <div class="col-sm-2 text-center community">
+                <p id="community3"></p>
+            </div>
+        </div>
     </div>
-
-    <div style="color: white; font-size: 48px; font-family: 'Titillium Web'; margin-left: 2%; margin-top: 1%">
-        Profile
-    </div>
-    <div style="margin-left: 2%; margin-right: -20%; float:left">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Guy_Pearce_Cannes_2012_%28revised%29.jpg"
-            width="70%" height="70%">
-    </div>
-
-    <div style="margin-right: 55%; float:right">
-        <div style="font-family:'Titillium Web'; font-size: 40px; color: white">
-            Name: Charles Montgomery
-        </div>
-
-    </div>
-    <br><br></br></br>
-    <div style="margin-right: 6%; float:right; width: 75%">
-        <div style="font-family:'Titillium Web'; font-size: 40px; color: white">
-            Bio: Hey there! My name is Charles and I'm living at 4238 Wilbur St. with my 2 dogs. When I'm not reviewing
-            the latest restaurants, you can find me hiking in the Berkeley Fire Trails or trying to learn how to paint.
-            Reach out if you ever need help with building anything, need food recommendations, or just want to chat :)
-        </div>
-
-    </div>
-
-
-    <div style="margin-top: 17%; margin-left: 2%; font-family: 'Titillium Web'; color: white; font-size: 48px">
-        Skills:
-    </div>
-
-    <div style="margin-left: 2%">
-        <div style="background-color: #2F472F; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
-            Cooking
-        </div>
-        <div style="background-color: #2F472F; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
-            Building
-        </div>
-        <div style="background-color: #2F472F; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
-            Painting
-        </div>
-        <div style="background-color: #2F472F; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
-            Hiking
-        </div>
-    </div>
-
-    <div style="margin-top: 7%; margin-left: 2%; font-family: 'Titillium Web'; color: white; font-size: 48px">
-        Communities:
-    </div>
-
-    <div style="margin-left: 2%">
-        <div style="background-color: #2F472F; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
-            Berkeley, CA
-        </div>
-        <div style="background-color: #2F472F; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
-            Pizza-Lovers
-        </div>
-        <div style="background-color: #2F472F; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
-            Cali Foodies
-        </div>
-        <div style="background-color: #2F472F; width: 20%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; float:left; margin-right: 4%">
-            NorCal >>>
-        </div>
-    </div>
-
 </body>
 <script>
     var uid = Date.now() % 10000; // Use this to ID the user
-    var socket = new WebSocket(
-        'ws://' + window.location.host + '/ws/chat');
+    var socket = new WebSocket('ws://' + window.location.host + '/ws/chat');
 
+    var user = JSON.parse(sessionStorage.getItem(sessionStorage.getItem('username')))
+    
+    document.getElementById("name").innerHTML = 'Name: ' + user.name
+    document.getElementById("bio").innerHTML = 'Bio: ' + user.bio
+
+    document.getElementById("skill1").innerHTML = user.skills[0]
+    document.getElementById("skill2").innerHTML = user.skills[1]
+    document.getElementById("skill3").innerHTML = user.skills[2]
+
+    document.getElementById("community1").innerHTML = user.communities[0]
+    document.getElementById("community2").innerHTML = user.communities[1]
+    document.getElementById("community3").innerHTML = user.communities[2]
 </script>
 
 </html>

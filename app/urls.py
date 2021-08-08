@@ -19,5 +19,7 @@ urlpatterns = [
     path('register2', views.register2, name='register2'),
     path('register3', views.register3, name='register3'),
     path('register4', views.register4, name='register4'),
-    path('chat', views.chat, name='chat')
+    path('chat', views.chat, name='chat'),
+    path('task', views.task, name='task'),
+    path('blog', views.blog, name='blog')
 ]

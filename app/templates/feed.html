@@ -28,7 +28,7 @@ body {
         .top-nav-bar {
             width: 100%;
             display: block;
-            position: fixed;
+            position: absolute;
             font-family: 'Quando';
         }
 
@@ -146,14 +146,32 @@ body {
         }
 
         .post-container {
-            height: 50px;
-            line-height: 50px;
-            padding-left: 15px;
-            font-size: 24px;
+            height: 100px;
+            line-height: 100px;
+            padding-left: 20px;
+            font-size: 28px;
             width: 100%;
             border-radius: 15px;
             background-color: #2F472F;
-            padding-right: 15px;
+            padding-right: 20px;
+        }
+
+        .feed-post {
+            margin-top: 1em;
+        }
+
+        .list-item {
+            height: 40px;
+            display: block;
+            float: left;
+            line-height: 40px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 50px;
+            background-color: #2F472F;
+            border-color: transparent;
+            margin-left: 1em;
+            margin-top: 10px;
         }
     </style>
 
@@ -177,111 +195,14 @@ body {
         </div>
         <br/><br/><br/>
         <h1 style="margin-left: 2%; color: white;">Feed</h1>
-        <br/>
         <div class="feed-container">
-            <div class="feed-post">
-                <p style="float: left;">(10:19 pm) Sara S. posted:</p>
+            <div id="empty-feed" style="width: 100%; margin: 0 auto; display: block; text-align: center;">
+                <! --Icon from flat icons -->
+                <img style="margin: 0 auto; margin-top: 10%; display: block;" src="https://image.flaticon.com/icons/png/512/2210/2210827.png" height="300" width="300"/>
                 <br/>
-                <br/>
-                <div class="post-container">
-                    <p style="float: left">Blog Post #24: Weekly Newsletter for Berkeley, CA</p>
-                    <div style="float: right;font-size: 36px;">
-                        <span class="material-icons material-icons-outlined">
-                            arrow_forward
-                        </span>
-                    </div>
-                </div>
+                <h1>Empty Feed</h1>
             </div>
-            <br/>
-            <div class="feed-post">
-                <p style="float: left;">(9:29 pm) Paul G. posted:</p>
-                <p style="float: right;">12pm - 3pm | Within 5 miles</p>
-                <br/>
-                <br/>
-                <div class="post-container">
-                    <p style="float: left">Task: Need help with assembling bookshelf</p>
-                    <div style="float: right;font-size: 36px;">
-                        <span class="material-icons material-icons-outlined">
-                            arrow_forward
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="feed-post">
-                <p style="float: left;">(7:45 pm) John D. posted:</p>
-                <p style="float: right;">12pm - 3pm | Within 5 miles</p>
-                <br/>
-                <br/>
-                <div class="post-container">
-                    <p style="float: left">Task: assistance required on CS Homework</p>
-                    <div style="float: right;font-size: 36px;">
-                        <span class="material-icons material-icons-outlined">
-                            arrow_forward
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="feed-post">
-                <p style="float: left;">(7:30 pm) George C. posted:</p>
-                <p style="float: right;">Aug 10, 2022 | Within 5 miles</p>
-                <br/>
-                <br/>
-                <div class="post-container">
-                    <p style="float: left">Task: Need help moving furnitures</p>
-                    <div style="float: right;font-size: 36px;">
-                        <span class="material-icons material-icons-outlined">
-                            arrow_forward
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="feed-post">
-                <p style="float: left;">(6:10 pm) Jeff B. posted:</p>
-                <p style="float: right;">Tomorrow | Within 5 miles</p>
-                <br/>
-                <br/>
-                <div class="post-container">
-                    <p style="float: left">Task: Helpers needed for community event!</p>
-                    <div style="float: right;font-size: 36px;">
-                        <span class="material-icons material-icons-outlined">
-                            arrow_forward
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="feed-post">
-                <p style="float: left;">(4:30 pm) Victoria A. posted:</p>
-                <p style="float: right;">Aug. 15, 2022 10am - 3pm | Within 5 miles</p>
-                <br/>
-                <br/>
-                <div class="post-container">
-                    <p style="float: left">Task: Assistance needed with gardening</p>
-                    <div style="float: right;font-size: 36px;">
-                        <span class="material-icons material-icons-outlined">
-                            arrow_forward
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="feed-post">
-                <p style="float: left;">(3:10 pm) Megan D. posted:</p>
-                <p style="float: right;">Tomorrow | Within 5 miles</p>
-                <br/>
-                <br/>
-                <div class="post-container">
-                    <p style="float: left">Task: Need help with  math homework</p>
-                    <div style="float: right;font-size: 36px;">
-                        <span class="material-icons material-icons-outlined">
-                            arrow_forward
-                        </span>
-                    </div>
-                </div>
-            </div>
+
         </div>
     
 </body>
@@ -289,6 +210,71 @@ body {
     var uid = Date.now() % 10000; // Use this to ID the user
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat');
+    var posts = []  
+    if (localStorage.getItem('posts') == null) {
+        localStorage.setItem('posts', JSON.stringify([]))
+    } else {
+        var posts = JSON.parse(localStorage.getItem('posts'))
+        console.log(posts)
+    }
+
+    function createTag(tag) {
+        return `<div class="list-item"> +
+                   ${tag}
+                </div>`
+    }
+    // Render the posts
+    function createFeedPost(post) { 
+        if (post.type == 'Task') {
+            let postHTML = `<div class="feed-post">
+                <p style="float: left;">(${post.posted_time}) ${post.author} posted:</p>
+                <p style="float: right;">${post.date}, ${post.time} | Within 5 miles</p>
+                <br/>
+                <br/>
+                <div class="post-container">
+                    <p style="float: left">${post.type}: ${post.header}</p>
+                    <div style="float: right;font-size: 36px;">
+                        <a href="${'./task?id=' + post.id}">
+                        <span class="material-icons material-icons-outlined">
+                            arrow_forward
+                        </span>
+                        </a>
+                    </div>
+                </div>
+            </div> `
+            return postHTML
+        } else {
+            // blog post
+
+
+            let postHTML = ` <div class="feed-post">
+                <p style="float: left;">(${post.posted_time}) ${post.author} posted:</p>
+                <br/>
+                <br/>
+                <div class="post-container">
+                    <p style="float: left">${post.header}</p>
+                    <div style="float: right;font-size: 36px;">
+                        <span class="material-icons material-icons-outlined">
+                            arrow_forward
+                        </span>
+                    </div>
+                </div>
+            </div>`
+            return postHTML
+        }
+    }
+
+    if (posts.length > 0) {
+        // Load each feedpost
+        $('#empty-feed').hide()
+        posts.forEach(post => {
+            console.log(post)
+            $('.feed-container').append(createFeedPost(post))
+        });
+    } else {
+        // Display empty feed
+        $('#empty-feed').show()
+    }
 
 </script>
 </html>

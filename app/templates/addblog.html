@@ -227,6 +227,24 @@
        
     }
 
+    function getPostedDate() {
+        let d = new Date()
+        let month = d.getMonth().toString() + 1
+        let day = d.getDate().toString()
+        let year = d.getFullYear().toString()
+        let militaryHour = d.getHours()
+        let min = d.getMinutes().toString()
+        let timeOfDay = ''
+        if (militaryHour > 12) {
+            timeOfDay = 'PM'
+        } else {
+            timeOfDay = 'AM'
+        }
+        let postString = `${month}/${day}/${year} - ${militaryHour % 12}:${min} ${timeOfDay}`
+        return postString
+
+    }
+
     // Populate the selector with tags
     let i = 0
     COMMUNITY_TAGS.forEach(el => {
@@ -266,16 +284,29 @@
     $('#create-blog-btn').click(() => {
         if (isValidData()) {
             let blog = {
-                type: 'blog',
+                type: 'Blog',
                 id: uid,
                 header: $('#blog-header').val(),
                 description: $('#blog-text').val(),
                 benefits: [],
                 subtasks: [],
-                tags: Array.from(selected_tags)
-                //author: localStorage.getItem('username') // Store the author of the post
+                tags: Array.from(selected_tags),
+                posted_time: getPostedDate(),
+                author: localStorage.getItem('username') // Store the author of the post
+            }
+            var posts = []
+            // Fetch latest localstorage
+            if (localStorage.getItem('posts') == null) {
+                localStorage.setItem('posts', JSON.stringify([]))
+                posts = []
+            } else {
+                let data = JSON.parse(localStorage.getItem('posts'))
+                posts = data
             }
             localStorage.setItem('blog_' + uid.toString, JSON.stringify(blog))
+            posts.push(blog)
+            localStorage.setItem('posts', JSON.stringify(posts))
+            location.reload();
             //console.log(blog)
             // TODO Broadcast via websocket. 
         }

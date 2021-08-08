@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>New Task</title>
+    <title>Task</title>
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
@@ -45,6 +45,7 @@
             color: white;
             float: left;
             margin-right: 1em;
+            border-radius: 15px;
         }
 
         .textinput-container {
@@ -159,6 +160,34 @@
             font-size: 24px;
         }
 
+        #task-time {
+            float: right;
+            font-size: 20px;
+            height: 50px;
+            width: 200px;
+            background-color: #2F472F;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 25px;
+        }
+
+        #task-description {
+            width: 55vw;
+            height: 20vh;
+            float:right;
+            background-color: #2F472F;
+            text-align: left;
+            padding: 20px;
+            font-size: 22px;
+            border-radius: 15px;
+        }
+
+        #chat-btn {
+            width: 300px;
+            background-color: black;
+            color: white;
+        }
+
     </style>
 
 </head>
@@ -170,82 +199,45 @@
             </div>
         </div>
         <br/><br/><br/>
-        <h1 style="margin-left: 2%; color: white; font-weight: bold;">Add Task</h1>
+        <div style="margin-left: 2%; margin-right: 2%;">
+            <h1 style="color: white; font-weight: bold; float: left;" id="task-header">Task: something</h1>
+            <div id="task-time">
+                10AM - 3 PM
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+
         <div class="form-container">
             <div id="photo-upload">
                 Photo
             </div>
-            <div class="input-group input-group-lg textinput-container">
-                <div class="input-group-prepend">
-                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Date and Time: </span>
-                </div>
-                <input type="date" id="task-date" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-                <input type="time" id="task-time" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-            </div>
-            <br/>
-            <br/>
-            <br/>
-
-            <div class="input-group input-group-lg textinput-container">
-                <div class="input-group-prepend">
-                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Task name: </span>
-                </div>
-                <input type="text" class="form-control textinput" id="task-header" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-            </div>
-            <div class="input-group input-group-lg textinput-container-long">
-                <div class="input-group-prepend">
-                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Description: </span>
-                </div>
-                <input type="text" class="form-control textinput" id="task-description" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+            <div id="task-description">
+                dasdsadasds
             </div>
             <br/>            <br/>            <br/>
-            <h2 style="float: left;">Subtasks</h2>
-            <div class="new-subtask-btn">
-                <a id="add-subtask-btn">
-                    <span class="material-icons material-icons-outlined">
-                        add
-                    </span>
-                </a>
-            </div>
+            <h2 id="num-subtasks" style="float: left; margin-top: 1em;">Subtasks List - 3</h2>
             <br/>
             <br/>
             <div class="tag-list" id="task-list">
-                <div class="task-item" id="task-item-0">
-                    <input type="text" class="form-control taskinput" id="task-0" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="new task"> 
-                    <a id='delete-0' class="delete-task" onclick="deleteSubTask(this.id)">
-                        <span class="material-icons material-icons-outlined">
-                            close
-                        </span>
-                    </a>
-                </div>
             </div> 
             <br/>
             <br/>
-            <h2 style="float: left; margin-top: 1em;">Benefits</h2>
-            <div class="new-subtask-btn" id="new-benefit-btn" style="margin-top: 1em;">
-                <span class="material-icons material-icons-outlined">
-                    add
-                </span>
-            </div>
+            <h2 id="num-benefits" style="float: left; margin-top: 1em;">Benefits - 2</h2>
             <br/>
             <br/>
             <br/>
             <div class="tag-list" id="benefit-list">
-                <div class="task-item" id="benefit-item-0">
-                    <input type="text" class="form-control taskinput" id="benefit-0" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="New Benefit"> 
-                    <a id="delete-0" onclick="deleteBenefit(this.id)" class="delete-task">
-                        <span class="material-icons material-icons-outlined">
-                            close
-                        </span>
-                    </a>
-                </div>
             </div>
             <br/>
             <br/>
             <br/>
             <div style="height: 74px; line-height: 74px; font-weight: bold;">
-                <p id="error" style="float: left; color: rgb(197, 67, 67);"></p>
-                <button type="button" id="create-task-btn" class="btn btn-primary submit-btn">Submit</button>
+                <button type="button" id="chat-btn" class="btn btn-primary submit-btn">Chat for specifics</button>
+                <a href="./feed">
+                    <span class="material-icons" style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>
+                </a>
             </div>
             
         </div>
@@ -256,26 +248,57 @@
     var uid = Date.now() % 10000; // Use this to ID the task
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat');
-        var longitude = -73.961452;
-    
-    var latitude = 40.714224; // Hard coded values
-    const apikey = 'AIzaSyCja2930U2Z83-qQdaHxK2qrh9f770jpq4'
-    // Get user's geolocation long lat
-    navigator.geolocation.getCurrentPosition(pos => {
-        console.log('client longitude ' + pos.coords.longitude)
-        console.log('client latitude ' + pos.coords.latitude)
-        longitude = pos.coords.longitude
-        latitude = pos.coords.latitude
-    });        
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    var taskid = params.id
+
+    function createSubTask(id, subtask) {
+        let subtaskHTML = `<div class="task-item" id="task-item-0">
+                    <p style="float: left;">${id}. ${subtask}</p>
+                    <a id='sign-up-0' class="delete-task">
+                        <span class="material-icons material-icons-outlined">
+                            add
+                        </span>
+                    </a>
+                </div>`
+        return subtaskHTML
+    }
+
+    function createBenefit(benefit) {
+        let subtaskHTML = `<div class="task-item" id="task-item-0">
+                    <p style="float: left;">${benefit}</p>
+                </div>`
+        return subtaskHTML
+    }
+
+
+    if (taskid == undefined) {
+        // Display error
+    } else {
+        // Fetch from localstorage
+        let task = JSON.parse(localStorage.getItem('task_' + taskid))
+
+        // Display
+        $('#task-header').text('Task: ' + task.header)
+        $('#task-description').text(task.description)
+        $('#task-time').text(task.time)
+        let subtaskid = 1
+        $('#num-subtasks').text('Subtasks List - ' + task.subtasks.length )
+        task.subtasks.forEach(subtask => {
+           let subtaskHTML = createSubTask(subtaskid, subtask)
+            $('#task-list').append(subtaskHTML)
+           subtaskid = subtaskid + 1
+        })
+        $('#num-benefits').text('Benefits - ' + task.benefits.length )
+        task.benefits.forEach(benefit => {
+           let benefitHTML = createBenefit(benefit)
+            $('#benefit-list').append(benefitHTML)
+        })
+    }
     let TASK_TAGS = ['baby-sitting', 'pet-sitting', 'moving furniture', 'assembling furniture', 'tutoring for hw', 'doing chores', 'security', 'company'] // TODO
     let numTasks = 1
     let numBenefits = 1
-    // One - Off
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apikey}`).then(resp => resp.json()).then(data => {
-        console.log(data) 
-        // Process location
-    })
-    
+
     function createNewSubTask(id) {
         let task = `<div class="task-item" id="task-item-${id}">
                     <input type="text" class="form-control taskinput" id="task-${id}" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="new task"> 

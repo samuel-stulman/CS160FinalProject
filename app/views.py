@@ -49,3 +49,9 @@ def register4(request):
 
 def chat(request):
     return render(request, 'chat.html')
+
+def task(request):
+    return render(request, 'task.html')
+
+def blog(request):
+    return render(request, 'blog.html')

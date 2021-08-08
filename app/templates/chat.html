@@ -86,19 +86,23 @@
             position: relative;
             position: fixed;
             bottom: 0px;
+            left: 25%;
             width: 50%;
         }
-        input[type="text"]{
+
+        input[type="text"] {
             background-color: #2F472F;
-            color:white;
+            color: white;
             border-radius: 10px;
             border: none;
         }
-        input[type="text"]:focus{
+
+        input[type="text"]:focus {
             background-color: #2F472F;
             color: white;
         }
-        #send{
+
+        #send {
             background-color: #2F472F;
             color: white;
             position: absolute;
@@ -107,11 +111,11 @@
             border-radius: 10px;
             z-index: 100;
         }
-        input[type="text"]::placeholder{
+
+        input[type="text"]::placeholder {
             padding-left: 10px;
             color: white;
         }
-
     </style>
 
 </head>
@@ -134,8 +138,9 @@
     <div class="row">
         <div class="col-lg-4 col-lg-offset-4">
             <div class="input-group mb-3 text-input">
-                <input type="text" class="form-control" placeholder="Enter Text Here" id = "textToSend">
-                <span class="input-group-text material-icons" id = "send" onclick="sendMessage()">send</span>
+                <input type="text" class="form-control" placeholder="Enter Text Here" onfocus="this.placeholder = ''"
+                    onblur="this.placeholder = 'Enter Text Here'" id="textToSend">
+                <span class="input-group-text material-icons" id="send" onclick="sendMessage()">send</span>
             </div>
         </div>
     </div>
@@ -147,7 +152,7 @@
         Note: For sender class should have sender for message and recive for message
         Note: For sender class should have sender for message and recive for message
     */
-    
+
     /*
         Data Structure use is {
             roomID -> [{
@@ -164,68 +169,85 @@
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
     var userName = urlParams.get("username");
-    var chatRoomID = JSON.stringify(urlParams.get("chatRoomId"));
+    var chatRoomID = urlParams.get("chatRoomId");
     var chats = localStorage.getItem("chats");
 
     var senderTag = "<div class='row justify-content-end sender'><h1>";
     var senderMessageTag = "<div class='send row justify-content-end'><h2>"
     var reciverTag = "<div class='row justify-content-start other'><h1>";
     var rexiverMessageTag = "<div class='recive row justify-content-start'><h2>";
-    
-    function onLoad(){
-        if(chats != null){
+
+    function onLoad() {
+        if (chats != null) {
             chats = JSON.parse(chats);
-            if(chats[chatRoomID] != undefined){
+            console.log(chats);
+            if (chats[chatRoomID] != undefined) {
                 var chatList = chats[chatRoomID];
-                for(var i = 0; i<chatList.length; i++){
+                for (var i = 0; i < chatList.length; i++) {
                     var chatElement = chatList[i];
-                    if(chatElement.username == userName){
+                    if (chatElement.username == userName) {
                         $(".container-fluid").append("<br><br>");
-                        $(".container-fluid").append(senderTag+chatElement.username+"</h1></div>");
-                        $(".container-fluid").append(senderMessageTag+chatElement.messageContent+"</h2></div>");
+                        $(".container-fluid").append(senderTag + chatElement.username + "</h1></div>");
+                        $(".container-fluid").append(senderMessageTag + chatElement.messageContent + "</h2></div>");
                         $(".container-fluid").append("<br><br>");
-                    }else{
+                    } else {
                         $(".container-fluid").append("<br><br>");
-                        $(".container-fluid").append(reciverTag+chatElement.username+"</h1></div>");
-                        $(".container-fluid").append(rexiverMessageTag+chatElement.messageContent+"</h2></div>");
+                        $(".container-fluid").append(reciverTag + chatElement.username + "</h1></div>");
+                        $(".container-fluid").append(rexiverMessageTag + chatElement.messageContent + "</h2></div>");
                         $(".container-fluid").append("<br><br>");
                     }
                 }
             }
         }
     }
-
-    function sendMessage(){
-        let message = $("#textToSend").val();
-        let name = senderTag+userName+"</h1></div>";
-        let messageToAppend = senderMessageTag+message+"</h2></div>";
-        $(".container-fluid").append("<br><br>");
-        $(".container-fluid").append(name);
-        $(".container-fluid").append(messageToAppend);
-        $(".container-fluid").append("<br><br>");
-        var messageInfo = {
-            messageContent : message,
-            username : userName
+    $('#textToSend').keypress(function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            sendMessage();
         }
-        if(chats == null || chats[chatRoomID] == undefined){
-            localStorage.setItem("chats",JSON.stringify({[chatRoomID] : [messageInfo]}));
-        }else{
+    });
+    function sendMessage() {
+        let message = $("#textToSend").val();
+        var messageInfo = {
+            messageContent: message,
+            username: userName,
+            id: chatRoomID
+        }
+        if (chats == null || chats[chatRoomID] == undefined) {
+            if(chats == null){
+                localStorage.setItem("chats", JSON.stringify({ [chatRoomID]: [messageInfo] }));
+            }else{
+                var chatlist = [messageInfo];
+                chats[chatRoomID] = chatlist;
+                localStorage.setItem("chats", JSON.stringify(chats));
+            }
+        } else {
             var chatlist = chats[chatRoomID];
             chatlist.push(messageInfo);
             chats[chatRoomID] = chatlist;
-            localStorage.setItem("chats",JSON.stringify(chats));
+            localStorage.setItem("chats", JSON.stringify(chats));
         }
+        document.getElementById('textToSend').value = '';
         socket.send(JSON.stringify(messageInfo));
     }
 
     socket.onmessage = function (receivedMessage) {
         var received = JSON.parse(receivedMessage.data);
-        if (userName != received.username) {
-            $(".container-fluid").append("<br><br>");
-            $(".container-fluid").append(reciverTag + received.username + "</h1></div>");
-            $(".container-fluid").append(rexiverMessageTag + received.messageContent + "</h2></div>");
-            $(".container-fluid").append("<br><br>");
+        console.log(received);
+        if (received.id == chatRoomID) {
+            if (userName != received.username) {
+                $(".container-fluid").append("<br><br>");
+                $(".container-fluid").append(reciverTag + received.username + "</h1></div>");
+                $(".container-fluid").append(rexiverMessageTag + received.messageContent + "</h2></div>");
+                $(".container-fluid").append("<br><br>");
+            } else {
+                $(".container-fluid").append("<br><br>");
+                $(".container-fluid").append(senderTag + received.username + "</h1></div>");
+                $(".container-fluid").append(senderMessageTag + received.messageContent + "</h2></div>");
+                $(".container-fluid").append("<br><br>");
+            }
         }
+
     }
 
 </script>

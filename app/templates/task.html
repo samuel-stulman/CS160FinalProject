@@ -290,7 +290,7 @@
         let subtaskID = parseId(id)
         console.log($(`#add-${subtaskID}`).text())
         let username = localStorage.getItem('username')
-        if ($(`#add-${subtaskID}`).text().trim() != 'done' && username != null && username != undefined) {
+        if ($(`#add-${subtaskID}`).text().trim() != 'done' && username != 'null' && username != undefined) {
             $(`#add-${subtaskID}`).text('done')
             $(`#add-${subtaskID}`).css('color', 'yellow')
 

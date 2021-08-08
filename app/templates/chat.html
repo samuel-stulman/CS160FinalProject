@@ -176,11 +176,9 @@
     var senderMessageTag = "<div class='send row justify-content-end'><h2>"
     var reciverTag = "<div class='row justify-content-start other'><h1>";
     var rexiverMessageTag = "<div class='recive row justify-content-start'><h2>";
-
     function onLoad() {
-        if (chats != null) {
+        if (chats != "null") {
             chats = JSON.parse(chats);
-            console.log(chats);
             if (chats[chatRoomID] != undefined) {
                 var chatList = chats[chatRoomID];
                 for (var i = 0; i < chatList.length; i++) {
@@ -213,10 +211,10 @@
             username: userName,
             id: chatRoomID
         }
-        if (chats == null || chats[chatRoomID] == undefined) {
-            if(chats == null){
+        if (chats == "null" || chats[chatRoomID] == undefined) {
+            if (chats == "null") {
                 localStorage.setItem("chats", JSON.stringify({ [chatRoomID]: [messageInfo] }));
-            }else{
+            } else {
                 var chatlist = [messageInfo];
                 chats[chatRoomID] = chatlist;
                 localStorage.setItem("chats", JSON.stringify(chats));

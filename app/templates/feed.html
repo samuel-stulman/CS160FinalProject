@@ -267,7 +267,8 @@ body {
     if (posts.length > 0) {
         // Load each feedpost
         $('#empty-feed').hide()
-        posts.forEach(post => {
+        let sorted_posts = posts.reverse()
+        sorted_posts.forEach(post => {
             console.log(post)
             $('.feed-container').append(createFeedPost(post))
         });

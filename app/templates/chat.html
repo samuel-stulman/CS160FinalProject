@@ -171,13 +171,12 @@
     var userName = urlParams.get("username");
     var chatRoomID = urlParams.get("chatRoomId");
     var chats = localStorage.getItem("chats");
-
     var senderTag = "<div class='row justify-content-end sender'><h1>";
     var senderMessageTag = "<div class='send row justify-content-end'><h2>"
     var reciverTag = "<div class='row justify-content-start other'><h1>";
     var rexiverMessageTag = "<div class='recive row justify-content-start'><h2>";
     function onLoad() {
-        if (chats != "null") {
+        if (chats != null) {
             chats = JSON.parse(chats);
             if (chats[chatRoomID] != undefined) {
                 var chatList = chats[chatRoomID];
@@ -211,8 +210,8 @@
             username: userName,
             id: chatRoomID
         }
-        if (chats == "null" || chats[chatRoomID] == undefined) {
-            if (chats == "null") {
+        if (chats == null || chats[chatRoomID] == undefined) {
+            if (chats == null) {
                 localStorage.setItem("chats", JSON.stringify({ [chatRoomID]: [messageInfo] }));
             } else {
                 var chatlist = [messageInfo];
@@ -233,6 +232,7 @@
         var received = JSON.parse(receivedMessage.data);
         console.log(received);
         if (received.id == chatRoomID) {
+            window.location.reload();
             if (userName != received.username) {
                 $(".container-fluid").append("<br><br>");
                 $(".container-fluid").append(reciverTag + received.username + "</h1></div>");

@@ -196,8 +196,15 @@
 
         #chat-btn {
             width: 300px;
+            margin-top: 1em;
+            padding: 10px;
             background-color: black;
             color: white;
+            text-decoration: none;
+            font-size: 24px;
+            border-radius: 15px;
+            float: right;
+            text-align: center;
         }
 
     </style>
@@ -206,9 +213,9 @@
 <body>
     <div class="outer-wrapper">
         <div class="top-nav-bar">
-            <div style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left">
+            <a href="./feed" style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left; text-decoration: none;">
                 Auxilium
-            </div>
+            </a>
         </div>
         <br/><br/><br/>
         <div style="margin-left: 2%; margin-right: 2%;">
@@ -249,7 +256,7 @@
             <br/>
             <br/>
             <div style="height: 74px; line-height: 74px; font-weight: bold;">
-                <button type="button" id="chat-btn" class="btn btn-primary submit-btn">Chat for specifics</button>
+                <a id="chat-btn">Chat for specifics</a>
                 <a href="./feed">
                     <span class="material-icons" style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>
                 </a>
@@ -271,7 +278,7 @@
         let subtaskHTML = `<div class="task-item" id="task-item-0">
                     <p style="float: left;" id="task-description-${id}">${id}. ${subtask.description}</p>
                     <a id='sign-${id}' class="delete-task" onclick="addSubtask(this.id)">
-                        <span id="add-${id}" class="material-icons material-icons-outlined">
+                        <span id="add-${id}" class="material-icons material-icons-outlined" style="margin-top: 13px">
                             ${subtask.hasSignUp ? 'done' : 'add' }
                         </span>
                     </a>
@@ -290,7 +297,7 @@
         let subtaskID = parseId(id)
         console.log($(`#add-${subtaskID}`).text())
         let username = localStorage.getItem('username')
-        if ($(`#add-${subtaskID}`).text().trim() != 'done' && username != 'null' && username != undefined) {
+        if ($(`#add-${subtaskID}`).text().trim() != 'done' && username != null && username != undefined) {
             $(`#add-${subtaskID}`).text('done')
             $(`#add-${subtaskID}`).css('color', 'yellow')
 
@@ -354,6 +361,9 @@
            let benefitHTML = createBenefit(benefit)
             $('#benefit-list').append(benefitHTML)
         })
+        let username = localStorage.getItem('username')
+        $('#chat-btn').attr('href', `./chat?chatRoomId=${task.chat_id}&username=${username ? username : 'Anonymous User'}`)
+
     }
     let TASK_TAGS = ['baby-sitting', 'pet-sitting', 'moving furniture', 'assembling furniture', 'tutoring for hw', 'doing chores', 'security', 'company'] // TODO
     

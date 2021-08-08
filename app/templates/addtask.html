@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>New Task</title>
+    <title>Request Help</title>
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
@@ -178,21 +178,49 @@
             width: 100%;
         }
 
+        #success-modal {
+            height: 400px;
+            width: 500px;
+            background-color: #5dc05d;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 20%;
+            top: 0;
+            position: fixed;
+            left: 50%;
+            margin-left: -250px;
+            border-radius: 15px;
+            padding: 15px;
+            -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-btn {
+            height: 50px;
+            width: 200px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: green;
+            color:white;
+            text-decoration: none;
+        }
+
     </style>
 
 </head>
 <body>
     <div class="outer-wrapper">
         <div class="top-nav-bar">
-            <div style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left">
+            <a href="./feed" style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left; text-decoration: none;">
                 Auxilium
-            </div>
+            </a>
         </div>
         <br/><br/><br/>
         <h1 style="margin-left: 2%; color: white; font-weight: bold;">Add Task</h1>
         <div class="form-container">
             <div id="photo-upload">
-                Photo
+                <img src="https://static.thenounproject.com/png/1967620-200.png" height="100" width="100">
             </div>
             <div class="input-group input-group-lg textinput-container">
                 <div class="input-group-prepend">
@@ -230,6 +258,7 @@
             <div id="tag-list">
             </div>
             <br/>            <br/>            <br/>
+            <br/>             <br/>   <br/>            <br/>
             <h2 style="float: left; margin-top: 1em;">Subtasks</h2>
             <div style="margin-top: 2em" class="new-subtask-btn">
                 <a id="add-subtask-btn">
@@ -242,9 +271,9 @@
             <br/>
             <div class="tag-list" id="task-list">
                 <div class="task-item" id="task-item-0">
-                    <input type="text" class="form-control taskinput" id="task-0" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="new task"> 
+                    <input type="text" class="form-control taskinput" id="task-0" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Divide your task into smaller subtasks! Ex. Divide Kitchen Help into Cooking for 20 people and Cutting vegetables for 20 people"> 
                     <a id='delete-0' class="delete-task" onclick="deleteSubTask(this.id)">
-                        <span class="material-icons material-icons-outlined">
+                        <span class="material-icons material-icons-outlined" style="margin-top: 13px">
                             close
                         </span>
                     </a>
@@ -254,7 +283,7 @@
             <br/>
             <h2 style="float: left; margin-top: 1em;">Benefits</h2>
             <div class="new-subtask-btn" id="new-benefit-btn" style="margin-top: 2em;">
-                <span class="material-icons material-icons-outlined">
+                <span class="material-icons material-icons-outlined" >
                     add
                 </span>
             </div>
@@ -263,9 +292,9 @@
             <br/>
             <div class="tag-list" id="benefit-list">
                 <div class="task-item" id="benefit-item-0">
-                    <input type="text" class="form-control taskinput" id="benefit-0" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="New Benefit"> 
+                    <input type="text" class="form-control taskinput" id="benefit-0" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Share benefits to get more volunteers! Ex. free pizza"> 
                     <a id="delete-0" onclick="deleteBenefit(this.id)" class="delete-task">
-                        <span class="material-icons material-icons-outlined">
+                        <span class="material-icons material-icons-outlined" style="margin-top: 13px">
                             close
                         </span>
                     </a>
@@ -278,6 +307,19 @@
                 <p id="error" style="float: left; color: rgb(197, 67, 67);"></p>
                 <button type="button" id="create-task-btn" class="btn btn-primary submit-btn">Submit</button>
             </div>
+            <div id="success-modal">
+                <h1>Successfully Posted!</h1>
+                <img src="https://d1j8pt39hxlh3d.cloudfront.net/uploads/party_face_256_1.gif" height="250" width="250">
+                <div style="width: 100%; padding-left: 25px; padding-right: 25px;">
+                    <a class="modal-btn" href="./feed" style="float: left; background-color: yellowgreen;">
+                        Return to Feed
+                    </a>
+                    <a class="modal-btn" onclick="location.reload()" style="float: right;">
+                        Create another post
+                    </a>
+                </div>
+                
+            </div>
             
         </div>
     </div>
@@ -288,7 +330,7 @@
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat');
         var longitude = -73.961452;
-    
+    $('#success-modal').hide()
     var latitude = 40.714224; // Hard coded values
     const apikey = 'AIzaSyCja2930U2Z83-qQdaHxK2qrh9f770jpq4'
     // Get user's geolocation long lat
@@ -335,9 +377,9 @@
     
     function createNewSubTask(id) {
         let task = `<div class="task-item" id="task-item-${id}">
-                    <input type="text" class="form-control taskinput" id="task-${id}" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="new task"> 
-                    <a id='delete-${id}' class="delete-task" onclick="deleteSubTask(this.id)">
-                        <span class="material-icons material-icons-outlined">
+                    <input type="text" class="form-control taskinput" id="task-${id}" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Divide your task into smaller subtasks! Ex. Divide Kitchen Help into Cooking for 20 people and Cutting vegetables for 20 people"> 
+                    <a id='delete-${id}' class="delete-task" onclick="deleteSubTask(this.id)" >
+                        <span class="material-icons material-icons-outlined" style="margin-top: 13px">
                             close
                         </span>
                     </a>
@@ -365,9 +407,9 @@
 
     function createNewBenefit(id) {
         let benefit = ` <div class="task-item" id="benefit-item-${id}">
-                    <input type="text" class="form-control taskinput" id="benefit-${id}" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="New Benefit"> 
+                    <input type="text" class="form-control taskinput" id="benefit-${id}" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Share benefits to get more volunteers! Ex. free pizza"> 
                     <a id="delete-${id}" onclick="deleteBenefit(this.id)" class="delete-task">
-                        <span class="material-icons material-icons-outlined">
+                        <span class="material-icons material-icons-outlined" style="margin-top: 13px">
                             close
                         </span>
                     </a>
@@ -454,7 +496,7 @@
             return false
         }
         // Check if the user is real
-        if (localStorage.getItem('username') == 'null' || localStorage.getItem('username') == undefined) {
+        if (localStorage.getItem('username') == null || localStorage.getItem('username') == undefined) {
             $('#error').text("unauthorized access")
             $('#error').show()
             return false
@@ -506,12 +548,13 @@
                 subtasks: subtasks, 
                 posted_time: getPostedDate(),
                 task_tags: Array.from(selected_tags),
+                chat_id: 'room' + uid,
                 author: localStorage.getItem('username') // Store the author of the post
             }
             var posts = []
             console.log(task)
             // Fetch latest localstorage
-            if (localStorage.getItem('posts') == 'null') {
+            if (localStorage.getItem('posts') == null) {
                 localStorage.setItem('posts', JSON.stringify([]))
                 posts = []
             } else {
@@ -521,7 +564,7 @@
             localStorage.setItem('task_' + uid.toString(), JSON.stringify(task))
             posts.push(task)
             localStorage.setItem('posts', JSON.stringify(posts))
-            location.reload();
+            $('#success-modal').show()
         }
         //localStorage.setItem('task_' + uid.toString, task)
         //TODO: Broadcast to websocket the new task

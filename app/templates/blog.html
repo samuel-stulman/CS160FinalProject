@@ -185,8 +185,15 @@
 
         #chat-btn {
             width: 300px;
+            margin-top: 1em;
+            padding: 10px;
             background-color: black;
             color: white;
+            text-decoration: none;
+            font-size: 24px;
+            border-radius: 15px;
+            float: right;
+            text-align: center;
         }
 
     </style>
@@ -195,9 +202,9 @@
 <body>
     <div class="outer-wrapper">
         <div class="top-nav-bar">
-            <div style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left">
+            <a href="./feed" style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left; text-decoration: none;">
                 Auxilium
-            </div>
+            </a>
         </div>
         <br/><br/><br/>
         <div style="margin-left: 2%; margin-right: 2%; text-align: center; width: 100%;">
@@ -214,7 +221,7 @@
                 Photo
             </div>
             <div style="height: 74px; line-height: 74px; font-weight: bold;">
-                <button type="button" id="chat-btn" class="btn btn-primary submit-btn">Chat for specifics</button>
+                <a id="chat-btn">Join the conversation</a>
                 <a href="./feed">
                     <span class="material-icons" style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>
                 </a>
@@ -261,6 +268,8 @@
         // Display
         $('#task-header').text(blog.header)
         $('#blog-description').text(blog.description)
+        let username = localStorage.getItem('username')
+        $('#chat-btn').attr('href', `./chat?chatRoomId=${blog.chat_id}&username=${username ? username : 'Anonymous User'}`)
     }
     
     

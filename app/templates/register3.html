@@ -99,7 +99,24 @@
             </div>
         </div>
 
-        <div class="row input">
+        <form>
+            <div class="form-group">
+                <label for="community1Input">Community #1:</label>
+                <input type="text" class="form-control" id="community1Input" placeholder="Enter Community #1">
+            </div>
+
+            <div class="form-group">
+                <label for="community2Input">Community #2:</label>
+                <input type="text" class="form-control" id="community2Input" placeholder="Enter Community #2">
+            </div>
+
+            <div class="form-group">
+                <label for="community3Input">Community #3:</label>
+                <input type="text" class="form-control" id="community3Input" placeholder="Enter Community #3">
+            </div>
+        </form>
+
+        <!-- <div class="row input">
             <p>Community #1:</p>
             <div class="col-sm-12 text-right input">
                 <span class="material-icons icon" style="color: white; font-size: 5rem; position: absolute;">arrow_drop_down</span>
@@ -118,7 +135,7 @@
             <div class="col-sm-12 text-right input">
                 <span class="material-icons icon" style="color: white; font-size: 5rem; position: absolute;">arrow_drop_down</span>
             </div>
-        </div>
+        </div> -->
 
         <div class="row back-forward">
             <div class="col-sm-5 back">
@@ -139,11 +156,18 @@
         'ws://' + window.location.host + '/ws/chat');
 
     function back() {
+        localStorage.setItem("skills", null)
         window.location.href = "/app/register2"
     }
 
     function forward() {
-        window.location.href = "/app/register4"
+        var community1 = document.getElementById("community1Input").value
+        var community2 = document.getElementById("community2Input").value
+        var community3 = document.getElementById("community3Input").value
+        if (community1 != '' && community2 != '' && community3 != '') {
+            localStorage.setItem("communities", [community1, community2, community3])
+            window.location.href = "/app/register4"
+        }
     }
 
 </script>

@@ -99,7 +99,23 @@
             </div>
         </div>
 
-        <div class="row input">
+        <form>
+            <div class="form-group">
+                <label for="skill1Input">Skill #1:</label>
+                <input type="text" class="form-control" id="skill1Input" placeholder="Enter Skill #1">
+            </div>
+
+            <div class="form-group">
+                <label for="skill2Input">Skill #2:</label>
+                <input type="text" class="form-control" id="skill2Input" placeholder="Enter Skill #2">
+            </div>
+
+            <div class="form-group">
+                <label for="skill3Input">Skill #3:</label>
+                <input type="text" class="form-control" id="skill3Input" placeholder="Enter Skill #3">
+            </div>
+        </form>
+        <!-- <div class="row input">
             <p>Skill #1:</p>
             <div class="col-sm-12 text-right input">
                 <span class="material-icons icon" style="color: white; font-size: 5rem; position: absolute;">arrow_drop_down</span>
@@ -118,7 +134,7 @@
             <div class="col-sm-12 text-right input">
                 <span class="material-icons icon" style="color: white; font-size: 5rem; position: absolute;">arrow_drop_down</span>
             </div>
-        </div>
+        </div> -->
 
         <div class="row back-forward">
             <div class="col-sm-5 back">
@@ -138,11 +154,19 @@
         'ws://' + window.location.host + '/ws/chat');
 
     function back() {
+        localStorage.setItem("username", null)
+        localStorage.setItem("password", null)
         window.location.href = "/app/register1"
     }
 
     function forward() {
-        window.location.href = "/app/register3"
+        var skill1 = document.getElementById("skill1Input").value
+        var skill2 = document.getElementById("skill2Input").value
+        var skill3 = document.getElementById("skill3Input").value
+        if (skill1 != '' && skill2 != '' && skill3 != '') {
+            localStorage.setItem("skills", [skill1, skill2, skill3])
+            window.location.href = "/app/register3"
+        }
     }
 
 </script>

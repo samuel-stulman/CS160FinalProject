@@ -16,7 +16,7 @@
         .container-fluid {
             height:100vh;
             width:100%;
-            /* background-image: url('../images/login.png'); */
+            /* background-image: url('/images/login.png'); */
             background-color: #439B3B;
             /* background-repeat: no-repeat;
             background-position: center;  */
@@ -87,26 +87,7 @@
             height: 25vh;
         }
 
-        .row.input {
-            width: 40rem;
-            height: 25vh;
-            margin-left: auto;
-            margin-right: auto;
-            /* padding-bottom: 2rem; */
-        }
-
-        .row.input p {
-            color: white;
-            font-size: 2.5rem;
-            font-family: 'Titillium Web', sans-serif;
-        }
-
-        .col-sm-12.input {
-            background-color: #2F472F;
-            height: 5rem;
-            border-radius: 20px;
-        }
-
+        
         .row.submit {
              /* border: 2px solid black; */
             padding-top: 2rem;
@@ -157,12 +138,12 @@
         <div class="row form">
             <form>
                 <div class="form-group">
-                    <label for="usernameInput" class="user-pass">Username:</label>
+                    <label for="usernameInput" class="user-pass" id="user">Username:</label>
                     <input type="username" class="form-control" id="usernameInput" placeholder="Enter Username">
                 </div>
     
                 <div class="form-group">
-                    <label for="passwordInput" class="user-pass">Password:</label>
+                    <label for="passwordInput" class="user-pass" id="pass">Password:</label>
                     <input type="password" class="form-control" id="passwordInput" placeholder="Enter Password">
                 </div>
 
@@ -174,31 +155,12 @@
             </form>
         </div>
 
-        <!-- <div class="row input">
-            <p>Username:</p>
-            <div class="col-sm-12 input"></div>
-        </div>
-
-        <div class="row input">
-            <p>Password:</p>
-            <div class="col-sm-12 input"></div>
-        </div>
-
-        <div class="row submit">
-            <div class="col-sm-12 submit">
-                <div class="row submit-btn" onclick="submit()">
-                    <div class="col-sm-12 submit-btn">
-                        <p>Submit</p>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
         <div class="row back">
             <span class="material-icons" onclick="back()" style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>
 
         </div>
     </div>
+    
 </body>
 <script>
     var uid = Date.now() % 10000; // Use this to ID the user
@@ -211,6 +173,14 @@
         if (username in items && JSON.parse(localStorage.getItem(username)).password == password) {
             localStorage.setItem('username', username)
             window.location.href = "/app/feed"
+        } else {
+            if (!(username in items)) {
+                document.getElementById("user").style.color = "red";
+                document.getElementById("pass").style.color = "red";
+            } else {
+                document.getElementById("user").style.color = "white";
+                document.getElementById("pass").style.color = "red";
+            }
         }
     }
 

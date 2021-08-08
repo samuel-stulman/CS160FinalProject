@@ -118,7 +118,7 @@
 
         <div class="row page-name">
             <div class="col-sm-5">
-                <p>Community</p>
+                <p id="title">Community</p>
             </div>
             <div class="col-sm-2"></div>
             <div class="col-sm-5 text-right" style="padding-right: 2rem;">
@@ -129,17 +129,17 @@
         <div class="row form">
             <form>
                 <div class="form-group" data-toggle="popover" data-content="Please enter your city and state. <br />Ex) Berkeley, CA" data-html="true">
-                    <label for="community1Input" class="community-label">Community #1:</label>
+                    <label for="community1Input" class="community-label" id="community1">Community #1:</label>
                     <input type="text" class="form-control" id="community1Input" placeholder="Enter Community #1">
                 </div>
     
                 <div class="form-group" data-toggle="popover" data-content="Please enter any organization you are apart of. <br />Ex) UC Berkeley" data-html="true">
-                    <label for="community2Input" class="community-label">Community #2:</label>
+                    <label for="community2Input" class="community-label" id="community2">Community #2:</label>
                     <input type="text" class="form-control" id="community2Input" placeholder="Enter Community #2">
                 </div>
     
                 <div class="form-group" data-toggle="popover" data-content="Please enter any local groups you are a member of. <br />Ex) The Daily Californian" data-html="true">
-                    <label for="community3Input" class="community-label">Community #3:</label>
+                    <label for="community3Input" class="community-label" id="community3">Community #3:</label>
                     <input type="text" class="form-control" id="community3Input" placeholder="Enter Community #3">
                 </div>
             </form>
@@ -179,6 +179,17 @@
             user['communities'] = [community1, community2, community3]
             localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
             window.location.href = "/app/register4"
+        } else {
+            const ids = ["community1", "community2", "community3"]
+            const vals = [community1, community2, community3]
+
+            for (let i = 0; i < vals.length; i++) {
+                if (vals[i] == ''){
+                        document.getElementById(ids[i]).style.color = "red";
+                } else {
+                        document.getElementById(ids[i]).style.color = "white";
+                }
+            }
         }
     }
 

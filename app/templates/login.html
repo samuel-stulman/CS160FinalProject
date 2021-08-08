@@ -45,6 +45,43 @@
             font-family: 'Titillium Web', sans-serif;
         }
 
+        .user-pass {
+            color: white;
+            font-size: 2.5rem;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .row.form {
+            width: 40rem;
+            margin-left: auto;
+            margin-right: auto;
+            /* padding-top: 2rem; */
+        }
+
+        #usernameInput {
+            width: 40rem;
+            height: 5rem;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #2F472F;
+            color: white;
+            font-size: 2rem;
+        }
+
+        #passwordInput {
+            width: 40rem;
+            height: 5rem;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #2F472F;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            height: 25vh;
+        }
+
         .row.input {
             width: 40rem;
             height: 25vh;
@@ -112,7 +149,27 @@
             </div>
         </div>
 
-        <div class="row input">
+        <div class="row form">
+            <form>
+                <div class="form-group">
+                    <label for="usernameInput" class="user-pass">Username:</label>
+                    <input type="username" class="form-control" id="usernameInput" placeholder="Enter Username">
+                </div>
+    
+                <div class="form-group">
+                    <label for="passwordInput" class="user-pass">Password:</label>
+                    <input type="password" class="form-control" id="passwordInput" placeholder="Enter Password">
+                </div>
+
+                <div class="row submit-btn" onclick="submit()">
+                    <div class="col-sm-12 submit-btn">
+                        <p>Submit</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- <div class="row input">
             <p>Username:</p>
             <div class="col-sm-12 input"></div>
         </div>
@@ -130,7 +187,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="row back">
             <span class="material-icons" onclick="back()" style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>
@@ -143,7 +200,13 @@
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat');
     function submit() {
-        window.location.href = "/app/feed"
+        var username = document.getElementById("usernameInput").value
+        var password = document.getElementById("passwordInput").value
+        const items = {...localStorage}
+        if (username in items && JSON.parse(localStorage.getItem(username)).password == password) {
+            localStorage.setItem('username', username)
+            window.location.href = "/app/feed"
+        }
     }
 
     function back() {

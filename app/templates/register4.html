@@ -188,9 +188,10 @@
         'ws://' + window.location.host + '/ws/chat');
 
     function back() {
-        user = JSON.parse(localStorage.getItem(localStorage.getItem('username')))
+        user = JSON.parse(sessionStorage.getItem(sessionStorage.getItem('username')))
         delete user["communities"]
-        localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
+        localStorage.setItem(sessionStorage.getItem('username'), JSON.stringify(user))
+        sessionStorage.setItem(sessionStorage.getItem('username'), JSON.stringify(user))
         window.location.href = "/app/register3"
     }
 
@@ -199,11 +200,12 @@
         var birthdate = document.getElementById("date").value
         var bio = document.getElementById("bioInput").value
         if (name != '' && birthdate != '' && bio != '') {
-            user = JSON.parse(localStorage.getItem(localStorage.getItem('username')))
+            user = JSON.parse(sessionStorage.getItem(sessionStorage.getItem('username')))
             user['name'] = name
             user['birthdate'] = birthdate
             user['bio'] = bio
-            localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
+            localStorage.setItem(sessionStorage.getItem('username'), JSON.stringify(user))
+            sessionStorage.setItem(sessionStorage.getItem('username'), JSON.stringify(user))
             window.location.href = "/app/feed"
         } else {
             const ids = ["name", "bday", "bio"]

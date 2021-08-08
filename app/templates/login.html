@@ -171,7 +171,8 @@
         var password = document.getElementById("passwordInput").value
         const items = {...localStorage}
         if (username in items && JSON.parse(localStorage.getItem(username)).password == password) {
-            localStorage.setItem('username', username)
+            sessionStorage.setItem('username', username)
+            sessionStorage.setItem(localStorage.getItem('username'), localStorage.getItem(localStorage.getItem('username')))
             window.location.href = "/app/feed"
         } else {
             if (!(username in items)) {

@@ -174,12 +174,14 @@
         if (checkbox.checked && username !='' && password != '' && !(username in items)) {
             // localStorage.setItem("username", JSON.stringify(username))
             // localStorage.setItem("password", password)
-            localStorage.setItem('username', username)
+            sessionStorage.setItem('username', username)
             localStorage.setItem(username, JSON.stringify({}))
-            user = JSON.parse(localStorage.getItem(username))
+            sessionStorage.setItem(username, JSON.stringify({}))
+            user = JSON.parse(sessionStorage.getItem(username))
             user['username'] = username
             user['password'] = password
-            localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
+            localStorage.setItem(sessionStorage.getItem('username'), JSON.stringify(user))
+            sessionStorage.setItem(sessionStorage.getItem('username'), JSON.stringify(user))
             window.location.href = "/app/register2"
         } else {
             const ids = ["user", "pass", "check"]

@@ -112,7 +112,7 @@
 
         <div class="row page-name">
             <div class="col-sm-8">
-                <p>Tag Selection -&emsp;<a href="http://www.womenworklife.com/wp-content/uploads/2014/06/List-of-Skills-for-Strategic-Volunteering.pdf">Example Skills</a></p>
+                <p id="title">Tag Selection -&emsp;<a href="http://www.womenworklife.com/wp-content/uploads/2014/06/List-of-Skills-for-Strategic-Volunteering.pdf">Example Skills</a></p>
             </div>
             <div class="col-sm-1"></div>
             <div class="col-sm-3 text-right" style="padding-right: 2rem;">
@@ -123,17 +123,17 @@
         <div class="row form">
             <form>
                 <div class="form-group">
-                    <label for="skill1Input" class="skill-label">Skill #1:</label>
+                    <label for="skill1Input" class="skill-label" id="skill1">Skill #1:</label>
                     <input type="text" class="form-control" id="skill1Input" placeholder="Enter Skill #1">
                 </div>
     
                 <div class="form-group">
-                    <label for="skill2Input" class="skill-label">Skill #2:</label>
+                    <label for="skill2Input" class="skill-label" id="skill2">Skill #2:</label>
                     <input type="text" class="form-control" id="skill2Input" placeholder="Enter Skill #2">
                 </div>
     
                 <div class="form-group">
-                    <label for="skill3Input" class="skill-label">Skill #3:</label>
+                    <label for="skill3Input" class="skill-label" id="skill3">Skill #3:</label>
                     <input type="text" class="form-control" id="skill3Input" placeholder="Enter Skill #3">
                 </div>
             </form>
@@ -170,6 +170,17 @@
             user['skills'] = [skill1, skill2, skill3]
             localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
             window.location.href = "/app/register3"
+        } else {
+            const ids = ["skill1", "skill2", "skill3"]
+            const vals = [skill1, skill2, skill3]
+
+            for (let i = 0; i < vals.length; i++) {
+                if (vals[i] == ''){
+                        document.getElementById(ids[i]).style.color = "red";
+                } else {
+                        document.getElementById(ids[i]).style.color = "white";
+                }
+            }
         }
     }
 

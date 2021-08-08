@@ -118,7 +118,7 @@
 
         <div class="row page-name">
             <div class="col-sm-5">
-                <p>Register</p>
+                <p id="title">Register</p>
             </div>
             <div class="col-sm-2"></div>
             <div class="col-sm-5 text-right" style="padding-right: 2rem;">
@@ -129,18 +129,18 @@
         <div class="row form">
             <form>
                 <div class="form-group">
-                    <label for="usernameInput" class="user-pass">Username:</label>
+                    <label for="usernameInput" class="user-pass" id="user">Username:</label>
                     <input type="username" class="form-control" id="usernameInput" placeholder="Enter Username">
                 </div>
     
                 <div class="form-group">
-                    <label for="passwordInput" class="user-pass">Password:</label>
+                    <label for="passwordInput" class="user-pass" id="pass">Password:</label>
                     <input type="password" class="form-control" id="passwordInput" placeholder="Enter Password">
                 </div>
     
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="checkInput">
-                    <label class="form-check-label" for="checkInput">I have read and accept these <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Terms & Conditions</a></label>
+                    <label class="form-check-label" for="checkInput" id="check">I have read and accept these <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Terms & Conditions</a></label>
                 </div>
             </form>
         </div>
@@ -151,7 +151,7 @@
             </div>
             <div class="col-sm-2"></div>
             <div class="col-sm-5 text-right forward">
-                <span class="material-icons" onclick="forward()" style="color: white; font-size: 4rem; padding-right: 2rem; padding-top: 1rem;">arrow_forward_ios</span>
+                <span class="material-icons" onclick="forward(this)" style="color: white; font-size: 4rem; padding-right: 2rem; padding-top: 1rem;">arrow_forward_ios</span>
             </div>
            
         </div>
@@ -170,7 +170,8 @@
         var username = document.getElementById("usernameInput").value
         var password = document.getElementById("passwordInput").value
         var checkbox = document.getElementById("checkInput")
-        if (checkbox.checked && username !='' && password != '') {
+        const items = {...localStorage}
+        if (checkbox.checked && username !='' && password != '' && !(username in items)) {
             // localStorage.setItem("username", JSON.stringify(username))
             // localStorage.setItem("password", password)
             localStorage.setItem('username', username)
@@ -180,6 +181,31 @@
             user['password'] = password
             localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
             window.location.href = "/app/register2"
+        } else {
+            const ids = ["user", "pass", "check"]
+            const vals = [username, password, checkbox]
+
+            for (let i = 0; i < vals.length; i++) {
+                if (vals[i] == checkbox) {
+                    if (!checkbox.checked) {
+                        document.getElementById(ids[i]).style.color = "red";
+                    } else {
+                        document.getElementById(ids[i]).style.color = "white";
+                    }
+
+                } else {
+                    if (vals[i] == ''){
+                        document.getElementById(ids[i]).style.color = "red";
+                    } else {
+                        document.getElementById(ids[i]).style.color = "white";
+                    }
+                }
+                
+            }
+
+            if (username in items) {
+                document.getElementById("user").style.color = "red";
+            }
         }
     }
 

@@ -123,7 +123,7 @@
 
         <div class="row page-name">
             <div class="col-sm-5">
-                <p>Personal Info</p>
+                <p id="title">Personal Info</p>
             </div>
             <div class="col-sm-2"></div>
             <div class="col-sm-5 text-right" style="padding-right: 2rem;">
@@ -134,17 +134,17 @@
         <div class="row form">
             <form>
                 <div class="form-group">
-                    <label for="nameInput" class="personal">Name:</label>
+                    <label for="nameInput" class="personal" id="name">Name:</label>
                     <input type="text" class="form-control" id="nameInput" placeholder="Enter Name">
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="date"> Birth Date:</label>
+                    <label class="control-label" for="date" id="bday"> Birth Date:</label>
                     <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
                 </div>
                 
     
                 <div class="form-group">
-                    <label for="bioInput" class="personal">Bio:</label>
+                    <label for="bioInput" class="personal" id="bio">Bio:</label>
                     <input type="text" class="form-control" id="bioInput" placeholder="Enter Bio">
                 </div>
             </form>
@@ -205,6 +205,17 @@
             user['bio'] = bio
             localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
             window.location.href = "/app/feed"
+        } else {
+            const ids = ["name", "bday", "bio"]
+            const vals = [name, birthdate, bio]
+
+            for (let i = 0; i < vals.length; i++) {
+                if (vals[i] == ''){
+                        document.getElementById(ids[i]).style.color = "red";
+                } else {
+                        document.getElementById(ids[i]).style.color = "white";
+                }
+            }
         }
     }
 

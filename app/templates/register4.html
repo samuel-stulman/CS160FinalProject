@@ -178,12 +178,10 @@
         'ws://' + window.location.host + '/ws/chat');
 
     function back() {
-        localStorage.setItem("communities", null)
+        user = JSON.parse(localStorage.getItem(localStorage.getItem('username')))
+        delete user["communities"]
+        localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
         window.location.href = "/app/register3"
-    }
-
-    function forward() {
-        
     }
 
     function home() {
@@ -191,9 +189,11 @@
         var birthdate = document.getElementById("date").value
         var bio = document.getElementById("bioInput").value
         if (name != '' && birthdate != '' && bio != '') {
-            localStorage.setItem("name", name)
-            localStorage.setItem("birthdate", birthdate)
-            localStorage.setItem("bio", bio)
+            user = JSON.parse(localStorage.getItem(localStorage.getItem('username')))
+            user['name'] = name
+            user['birthdate'] = birthdate
+            user['bio'] = bio
+            localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
             window.location.href = "/app/feed"
         }
     }

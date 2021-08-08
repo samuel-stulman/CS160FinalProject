@@ -156,7 +156,9 @@
         'ws://' + window.location.host + '/ws/chat');
 
     function back() {
-        localStorage.setItem("skills", null)
+        user = JSON.parse(localStorage.getItem(localStorage.getItem('username')))
+        delete user["skills"]
+        localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
         window.location.href = "/app/register2"
     }
 
@@ -165,7 +167,9 @@
         var community2 = document.getElementById("community2Input").value
         var community3 = document.getElementById("community3Input").value
         if (community1 != '' && community2 != '' && community3 != '') {
-            localStorage.setItem("communities", [community1, community2, community3])
+            user = JSON.parse(localStorage.getItem(localStorage.getItem('username')))
+            user['communities'] = [community1, community2, community3]
+            localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
             window.location.href = "/app/register4"
         }
     }

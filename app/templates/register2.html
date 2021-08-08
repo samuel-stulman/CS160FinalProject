@@ -154,8 +154,7 @@
         'ws://' + window.location.host + '/ws/chat');
 
     function back() {
-        localStorage.setItem("username", null)
-        localStorage.setItem("password", null)
+        localStorage.clear()
         window.location.href = "/app/register1"
     }
 
@@ -164,7 +163,9 @@
         var skill2 = document.getElementById("skill2Input").value
         var skill3 = document.getElementById("skill3Input").value
         if (skill1 != '' && skill2 != '' && skill3 != '') {
-            localStorage.setItem("skills", [skill1, skill2, skill3])
+            user = JSON.parse(localStorage.getItem(localStorage.getItem('username')))
+            user['skills'] = [skill1, skill2, skill3]
+            localStorage.setItem(localStorage.getItem('username'), JSON.stringify(user))
             window.location.href = "/app/register3"
         }
     }

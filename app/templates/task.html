@@ -163,11 +163,23 @@
         #task-time {
             float: right;
             font-size: 20px;
-            height: 50px;
-            width: 200px;
+            height: 60px;
+            width: 250px;
             background-color: #2F472F;
             text-align: center;
-            line-height: 50px;
+            line-height: 60px;
+            border-radius: 25px;
+            margin-left: 10px;
+        }
+
+        #task-date {
+            float: right;
+            font-size: 20px;
+            height: 60px;
+            width: 150px;
+            background-color: #2F472F;
+            text-align: center;
+            line-height: 60px;
             border-radius: 25px;
         }
 
@@ -202,7 +214,10 @@
         <div style="margin-left: 2%; margin-right: 2%;">
             <h1 style="color: white; font-weight: bold; float: left;" id="task-header">Task: something</h1>
             <div id="task-time">
-                10AM - 3 PM
+                
+            </div>
+            <div id="task-date">
+                dasdsadasdasdsa
             </div>
         </div>
         <br/>
@@ -214,17 +229,17 @@
                 Photo
             </div>
             <div id="task-description">
-                dasdsadasds
+                
             </div>
             <br/>            <br/>            <br/>
-            <h2 id="num-subtasks" style="float: left; margin-top: 1em;">Subtasks List - 3</h2>
+            <h2 id="num-subtasks" style="float: left; margin-top: 1em;">Subtasks List</h2>
             <br/>
             <br/>
             <div class="tag-list" id="task-list">
             </div> 
             <br/>
             <br/>
-            <h2 id="num-benefits" style="float: left; margin-top: 1em;">Benefits - 2</h2>
+            <h2 id="num-benefits" style="float: left; margin-top: 1em;">Benefits</h2>
             <br/>
             <br/>
             <br/>
@@ -254,10 +269,10 @@
 
     function createSubTask(id, subtask) {
         let subtaskHTML = `<div class="task-item" id="task-item-0">
-                    <p style="float: left;">${id}. ${subtask}</p>
-                    <a id='sign-up-0' class="delete-task">
-                        <span class="material-icons material-icons-outlined">
-                            add
+                    <p style="float: left;" id="task-description-${id}">${id}. ${subtask.description}</p>
+                    <a id='sign-${id}' class="delete-task" onclick="addSubtask(this.id)">
+                        <span id="add-${id}" class="material-icons material-icons-outlined">
+                            ${subtask.hasSignUp ? 'done' : 'add' }
                         </span>
                     </a>
                 </div>`
@@ -271,6 +286,50 @@
         return subtaskHTML
     }
 
+    function addSubtask(id) {
+        let subtaskID = parseId(id)
+        console.log($(`#add-${subtaskID}`).text())
+        let username = localStorage.getItem('username')
+        if ($(`#add-${subtaskID}`).text().trim() != 'done' && username != null && username != undefined) {
+            $(`#add-${subtaskID}`).text('done')
+            $(`#add-${subtaskID}`).css('color', 'yellow')
+
+            // Add to user's todo
+            // Mark the subtask as signed up.
+            let task = JSON.parse(localStorage.getItem('task_' + taskid))
+            let newSubTask = undefined
+            let subtasks = task.subtasks
+            let i = 0
+            task.subtasks.forEach(subtask => {
+                if (newSubTask == undefined && $(`#task-description-${subtaskID}`).text().includes(subtask.description)) {
+                    console.log('here')
+                    newSubTask = subtask
+                    newSubTask.hasSignUp = true
+                    subtasks.splice(i, 1)
+                    subtasks.splice(i, 0, newSubTask)
+                }
+                i+=1
+            })
+            task.subtasks = subtasks
+            console.log(task)
+            localStorage.setItem('task_' + taskid, JSON.stringify(task))
+            // Update user's storage
+            // Fetch user data from localstorage
+            let userdata = JSON.parse(localStorage.getItem(username))
+            // Store as a set
+            let todos = userdata.todos
+            if (todos == undefined) {
+                todos = []
+                todos.push('task_' + taskid)
+            } else {
+                todos.push('task_' + taskid)
+            }
+            userdata.todos = todos
+            localStorage.setItem(username, JSON.stringify(userdata))
+        }
+    }
+
+
 
     if (taskid == undefined) {
         // Display error
@@ -281,7 +340,8 @@
         // Display
         $('#task-header').text('Task: ' + task.header)
         $('#task-description').text(task.description)
-        $('#task-time').text(task.time)
+        $('#task-time').text(`${task.start_time + '-' + task.end_time}`)
+        $('#task-date').text(task.date)
         let subtaskid = 1
         $('#num-subtasks').text('Subtasks List - ' + task.subtasks.length )
         task.subtasks.forEach(subtask => {
@@ -296,208 +356,11 @@
         })
     }
     let TASK_TAGS = ['baby-sitting', 'pet-sitting', 'moving furniture', 'assembling furniture', 'tutoring for hw', 'doing chores', 'security', 'company'] // TODO
-    let numTasks = 1
-    let numBenefits = 1
-
-    function createNewSubTask(id) {
-        let task = `<div class="task-item" id="task-item-${id}">
-                    <input type="text" class="form-control taskinput" id="task-${id}" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="new task"> 
-                    <a id='delete-${id}' class="delete-task" onclick="deleteSubTask(this.id)">
-                        <span class="material-icons material-icons-outlined">
-                            close
-                        </span>
-                    </a>
-                </div>`
-        return task
-    }
+    
 
     function parseId(id) {
         let splits = id.split('-')
         return splits[1]
-    }
-
-    function deleteSubTask(id) {
-        // Parse the subtask id
-        let taskId = parseId(id)
-        $('#task-item-' + taskId).remove();
-    }
-
-
-    function deleteBenefit(id) {
-        // Parse the subtask id
-        let benefitId = parseId(id)
-        $('#benefit-item-' + benefitId).remove();
-    }
-
-    function createNewBenefit(id) {
-        let benefit = ` <div class="task-item" id="benefit-item-${id}">
-                    <input type="text" class="form-control taskinput" id="benefit-${id}" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="New Benefit"> 
-                    <a id="delete-${id}" onclick="deleteBenefit(this.id)" class="delete-task">
-                        <span class="material-icons material-icons-outlined">
-                            close
-                        </span>
-                    </a>
-                </div>`
-        return benefit
-    }
-
-    function getPostedDate() {
-        let d = new Date()
-        let month = d.getMonth().toString() + 1
-        let day = d.getDate().toString()
-        let year = d.getFullYear().toString()
-        let militaryHour = d.getHours()
-        let min = d.getMinutes().toString()
-        let timeOfDay = ''
-        if (militaryHour > 12) {
-            timeOfDay = 'PM'
-        } else {
-            timeOfDay = 'AM'
-        }
-        let postString = `${month}/${day}/${year} - ${militaryHour % 12}:${min} ${timeOfDay}`
-        return postString
-    }
-
-    function MilitaryToRegular(timeStr) {
-        let splits = timeStr.split(':')
-        console.log(splits)
-        let hour = parseInt(splits[0])
-        let minute = splits[1]
-        let timeOfDay = ''
-        if (hour >= 12) {
-            timeOfDay = 'PM'
-        } else {
-            timeOfDay = 'AM'
-        }
-        if (hour == 0) {
-            // 12 AM
-            return `12: ${minute} ${timeOfDay}`
-        } else if (hour == 12) {
-            return `12: ${minute} ${timeOfDay}`
-        }
-        return `${hour % 12}: ${minute} ${timeOfDay}`
-    }
-
-
-    $('#add-subtask-btn').click(() => {
-        $('#task-list').append(
-            createNewSubTask(numTasks)
-        )
-        numTasks = numTasks + 1
-    })
-
-
-    $('#new-benefit-btn').click(() => {
-        $('#benefit-list').append(
-            createNewBenefit(numBenefits)
-        )
-        numBenefits = numBenefits + 1
-    })
-
-    function isValidData() {
-        let date = $('#task-date').val()
-        let time = $('#task-time').val()
-        let header = $('#task-header').val()
-        let description = $('#task-description').val()
-        if (date.length == 0) {
-            $('#error').text("error with date")
-            $('#error').show()
-            return false
-        }
-        if (time.length == 0) {
-            $('#error').text("error with time")
-            $('#error').show()
-            return false
-        }
-        if (header.length == 0) {
-            $('#error').text("error with task name")
-            $('#error').show()
-            return false
-        }
-        if (description.length == 0) {
-            $('#error').text("error with description")
-            $('#error').show()
-            return false
-        }
-        // Check if the user is real
-        /*
-        if (localStorage.getItem('username') == null) {
-            $('#error').text("unauthorized access")
-            $('#error').show()
-            return false
-        }
-        */
-        $('#error').hide()
-        return true
-
-    }
-
-
-    $('#create-task-btn').click(() => {
-        let subtasks = []
-        let benefits = []
-        for (let i=0; i <= numTasks; i++) {
-            if ($('#task-' + i.toString()).length) {
-                // Task exists
-                let task = $('#task-' + i.toString()).val()
-                if (task.length > 0) {
-                    subtasks.push($('#task-' + i.toString()).val())
-                }
-            }
-        }
-
-        for (let i=0; i < numBenefits; i++) {
-            if ($('#benefit-' + i.toString()).length) {
-                // Task exists
-                let benefit = $('#benefit-' + i.toString()).val()
-                if (benefit.length > 0) {
-                    benefits.push($('#benefit-' + i.toString()).val())
-                }
-                
-            }
-        }
-        // Error checkin
-        if (isValidData()) {        
-            let task = {
-                type: 'Task',
-                id: uid,
-                date: $('#task-date').val(),
-                time: MilitaryToRegular($('#task-time').val()),
-                header: $('#task-header').val(),
-                description: $('#task-description').val(),
-                benefits: benefits,
-                subtasks: subtasks, 
-                posted_time: getPostedDate(),
-                author: localStorage.getItem('username') // Store the author of the post
-            }
-            var posts = []
-            console.log(task)
-            // Fetch latest localstorage
-            if (localStorage.getItem('posts') == null) {
-                localStorage.setItem('posts', JSON.stringify([]))
-                posts = []
-            } else {
-                let data = JSON.parse(localStorage.getItem('posts'))
-                posts = data
-            }
-            localStorage.setItem('task_' + uid.toString(), JSON.stringify(task))
-            posts.push(task)
-            localStorage.setItem('posts', JSON.stringify(posts))
-            location.reload();
-        }
-        //localStorage.setItem('task_' + uid.toString, task)
-        //TODO: Broadcast to websocket the new task
-    })
-
-
-    let task = {
-        type: 'task',
-        date: '',
-        time: '',
-        header: '',
-        description: '',
-        benefits: [],
-        subtasks: []
     }
 
     

@@ -1,0 +1,268 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Blog</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+        body {
+            background-color: #439B3B;
+            color: white;
+            font-family: 'Titillium Web';
+        }
+
+        .top-nav-bar {
+            width: 100%;
+            display: block;
+            position: absolute;
+            font-family: 'Quando';
+        }
+
+        .form-container {
+            height: 100%;
+            width: 96%;
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+
+        #photo-upload {
+            height: 25vh;
+            width: 100%;
+            background-color: #c4c4c4;
+            display: block;
+            line-height: 25vh;
+            text-align: center;
+            font-size: 24px;
+            color: white;
+            float: left;
+            margin-right: 1em;
+            border-radius: 15px;
+            margin-top: 1em;
+        }
+
+        .textinput-container {
+            float: right;
+            width: 60%;
+        }
+
+        .textinput-container-long {
+            float: right;
+            width: 100%;
+            margin-top: 1em;
+        }
+
+        .textinput-label {
+            background-color: #2F472F;
+            color: white;
+            border-color: transparent;
+        }
+
+        .textinput {
+            background-color:#2F472F;
+            border-color: #2F472F;
+            color: white;
+        }
+        
+        .textinput:focus {
+            background-color:#2F472F;
+            border-color: transparent;
+            color: white;
+        }
+        
+
+        #blog-heading {
+            width: 50vw;
+            float: right;
+            background-color: #2F472F;
+            border-color: #2F472F;
+            color: white;
+            
+        }
+
+        .dropdown-select {
+            height: 50px;
+            width: 200px;
+            margin-left: 1em;
+        }
+
+        .tag-list {
+        }
+
+
+        #blog-heading::placeholder {
+            color: #f4f4f4;
+        }
+
+        .task-item {
+            height: 50px;
+            width: 100%;
+            font-size: 24px;
+            float: left;
+            line-height: 50px;
+            padding-left: 20px;
+            padding-right: 10px;
+            border-radius: 5px;
+            background-color: #2F472F;
+            border-color: transparent;
+            margin-top: 10px;
+
+        }
+
+        .submit-btn {
+            width: 30%;
+            height: 74px;
+            border-radius: 15px;
+            margin-top: 1em;
+            float: right;
+            background-color: rgb(241, 223, 223);
+            color: black;
+            border-color: transparent;
+            font-size: 32px;
+        }
+
+        .submit-btn:hover {
+            background-color: #2F472F;
+            border-color: transparent;
+        }
+
+        .new-subtask-btn {
+            float: right;
+            height: 50px;
+            line-height: 50px;
+        }
+        
+        .taskinput {
+            height: 50px;
+            width: 95%;
+            background-color: transparent;
+            border: transparent;
+            color: white;
+            font-size: 24px;
+            float: left;
+        }
+
+        .taskinput:focus {
+            background-color: transparent;
+            border: transparent;
+            color: white;
+        }
+
+        .delete-task {
+            float: right;
+            font-size: 24px;
+        }
+
+        #task-time {
+            float: right;
+            font-size: 20px;
+            height: 50px;
+            width: 200px;
+            background-color: #2F472F;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 25px;
+        }
+
+        #blog-description {
+            width: 100%;
+            height: 30vh;
+            float:right;
+            background-color: #2F472F;
+            text-align: left;
+            padding: 20px;
+            font-size: 24px;
+            border-radius: 15px;
+        }
+
+        #chat-btn {
+            width: 300px;
+            background-color: black;
+            color: white;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="outer-wrapper">
+        <div class="top-nav-bar">
+            <div style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left">
+                Auxilium
+            </div>
+        </div>
+        <br/><br/><br/>
+        <div style="margin-left: 2%; margin-right: 2%; text-align: center; width: 100%;">
+            <h1 style="color: white; font-weight: bold;" id="task-header"></h1>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div class="form-container">
+            <div id="blog-description">
+            </div>
+
+            <div id="photo-upload">
+                Photo
+            </div>
+            <div style="height: 74px; line-height: 74px; font-weight: bold;">
+                <button type="button" id="chat-btn" class="btn btn-primary submit-btn">Chat for specifics</button>
+                <a href="./feed">
+                    <span class="material-icons" style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>
+                </a>
+            </div>
+            
+        </div>
+    </div>
+
+</body>
+<script>
+    var uid = Date.now() % 10000; // Use this to ID the task
+    var socket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat');
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    var taskid = params.id
+
+    function createSubTask(id, subtask) {
+        let subtaskHTML = `<div class="task-item" id="task-item-0">
+                    <p style="float: left;">${id}. ${subtask}</p>
+                    <a id='sign-up-0' class="delete-task">
+                        <span class="material-icons material-icons-outlined">
+                            add
+                        </span>
+                    </a>
+                </div>`
+        return subtaskHTML
+    }
+
+    function createBenefit(benefit) {
+        let subtaskHTML = `<div class="task-item" id="task-item-0">
+                    <p style="float: left;">${benefit}</p>
+                </div>`
+        return subtaskHTML
+    }
+
+
+    if (taskid == undefined) {
+        // Display error
+    } else {
+        // Fetch from localstorage
+        let blog = JSON.parse(localStorage.getItem('blog_' + taskid))
+
+        // Display
+        $('#task-header').text(blog.header)
+        $('#blog-description').text(blog.description)
+    }
+    
+    
+</script>
+</html>

@@ -228,7 +228,7 @@ body {
         if (post.type == 'Task') {
             let postHTML = `<div class="feed-post">
                 <p style="float: left;">(${post.posted_time}) ${post.author} posted:</p>
-                <p style="float: right;">${post.date}, ${post.time} | Within 5 miles</p>
+                <p style="float: right;">${post.date}, ${post.start_time} - ${post.end_time} | Within 5 miles</p>
                 <br/>
                 <br/>
                 <div class="post-container">
@@ -245,8 +245,6 @@ body {
             return postHTML
         } else {
             // blog post
-
-
             let postHTML = ` <div class="feed-post">
                 <p style="float: left;">(${post.posted_time}) ${post.author} posted:</p>
                 <br/>
@@ -254,9 +252,11 @@ body {
                 <div class="post-container">
                     <p style="float: left">${post.header}</p>
                     <div style="float: right;font-size: 36px;">
+                        <a href="${'./blog?id=' + post.id}">
                         <span class="material-icons material-icons-outlined">
                             arrow_forward
                         </span>
+                        </a>
                     </div>
                 </div>
             </div>`

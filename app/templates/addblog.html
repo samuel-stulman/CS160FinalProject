@@ -240,9 +240,8 @@
         } else {
             timeOfDay = 'AM'
         }
-        let postString = `${month}/${day}/${year} - ${militaryHour % 12}:${min} ${timeOfDay}`
+        let postString = `${month}/${day}/${year} - ${militaryHour % 12}:${min < 10 ? '0' + min : min} ${timeOfDay}`
         return postString
-
     }
 
     // Populate the selector with tags
@@ -303,7 +302,7 @@
                 let data = JSON.parse(localStorage.getItem('posts'))
                 posts = data
             }
-            localStorage.setItem('blog_' + uid.toString, JSON.stringify(blog))
+            localStorage.setItem('blog_' + uid.toString(), JSON.stringify(blog))
             posts.push(blog)
             localStorage.setItem('posts', JSON.stringify(posts))
             location.reload();

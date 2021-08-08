@@ -177,16 +177,22 @@
             </div>
             <div class="input-group input-group-lg textinput-container">
                 <div class="input-group-prepend">
-                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Date and Time: </span>
+                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Date:</span>
                 </div>
                 <input type="date" id="task-date" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class="input-group input-group-lg textinput-container" style="margin-top: 1em;">
+                <div class="input-group-prepend">
+                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Start - End Time:</span>
+                </div>
                 <input type="time" id="task-time" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                <input type="time" id="task-end-time" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div>
             <br/>
             <br/>
             <br/>
 
-            <div class="input-group input-group-lg textinput-container">
+            <div style="margin-top: 1em;" class="input-group input-group-lg textinput-container">
                 <div class="input-group-prepend">
                   <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Task name: </span>
                 </div>
@@ -199,8 +205,8 @@
                 <input type="text" class="form-control textinput" id="task-description" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div>
             <br/>            <br/>            <br/>
-            <h2 style="float: left;">Subtasks</h2>
-            <div class="new-subtask-btn">
+            <h2 style="float: left; margin-top: 1em;">Subtasks</h2>
+            <div style="margin-top: 2em" class="new-subtask-btn">
                 <a id="add-subtask-btn">
                     <span class="material-icons material-icons-outlined">
                         add
@@ -222,7 +228,7 @@
             <br/>
             <br/>
             <h2 style="float: left; margin-top: 1em;">Benefits</h2>
-            <div class="new-subtask-btn" id="new-benefit-btn" style="margin-top: 1em;">
+            <div class="new-subtask-btn" id="new-benefit-btn" style="margin-top: 2em;">
                 <span class="material-icons material-icons-outlined">
                     add
                 </span>
@@ -331,7 +337,7 @@
         } else {
             timeOfDay = 'AM'
         }
-        let postString = `${month}/${day}/${year} - ${militaryHour % 12}:${min} ${timeOfDay}`
+        let postString = `${month}/${day}/${year} - ${militaryHour % 12}:${min < 10 ? '0' + min : min} ${timeOfDay}`
         return postString
     }
 
@@ -418,7 +424,11 @@
                 // Task exists
                 let task = $('#task-' + i.toString()).val()
                 if (task.length > 0) {
-                    subtasks.push($('#task-' + i.toString()).val())
+                    let subtask = {
+                        description: $('#task-' + i.toString()).val(),
+                        hasSignUp: false
+                    }
+                    subtasks.push(subtask)
                 }
             }
         }
@@ -439,7 +449,8 @@
                 type: 'Task',
                 id: uid,
                 date: $('#task-date').val(),
-                time: MilitaryToRegular($('#task-time').val()),
+                start_time: MilitaryToRegular($('#task-time').val()),
+                end_time: MilitaryToRegular($('#task-end-time').val()),
                 header: $('#task-header').val(),
                 description: $('#task-description').val(),
                 benefits: benefits,

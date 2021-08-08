@@ -267,6 +267,7 @@
         longitude = pos.coords.longitude
         latitude = pos.coords.latitude
     });        
+    let TASK_TAGS = ['baby-sitting', 'pet-sitting', 'moving furniture', 'assembling furniture', 'tutoring for hw', 'doing chores', 'security', 'company'] // TODO
     let numTasks = 1
     let numBenefits = 1
     // One - Off
@@ -399,21 +400,21 @@
         // Error checkin
         if (isValidData()) {
             let task = {
-            type: 'task',
-            id: uid,
-            date: $('#task-date').val(),
-            time: $('#task-time').val(),
-            header: $('#task-header').val(),
-            description: $('#task-description').val(),
-            benefits: benefits,
-            subtasks: subtasks, 
+                type: 'task',
+                id: uid,
+                date: $('#task-date').val(),
+                time: $('#task-time').val(),
+                header: $('#task-header').val(),
+                description: $('#task-description').val(),
+                benefits: benefits,
+                subtasks: subtasks, 
             //author: localStorage.getItem('username') // Store the author of the post
             }
             localStorage.setItem('task_' + uid.toString(), JSON.stringify(task))
             location.reload();
         }
         //localStorage.setItem('task_' + uid.toString, task)
-        // Broadcast to websocket the new task
+        //TODO: Broadcast to websocket the new task
     })
 
 

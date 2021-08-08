@@ -116,7 +116,7 @@
 
 </head>
 
-<body>
+<body onload="onLoad()">
     <div class="container-fluid">
         <div class="row app-name">
             <div class="col-sm-12 app-name">
@@ -126,30 +126,6 @@
         <div class="row justify-content-center">
             <h1>CHATROOM</h1>
         </div>
-        <br>
-        <div class="row justify-content-start other">
-            <h1>Sara S.</h1>
-        </div>
-        <div class="recive row justify-content-start">
-            <h2>Hey Paul! Quick Question, do we need to pay for parking at IKEA?</h2>
-        </div>
-        <br>
-        <br>
-        <div class="row justify-content-end sender">
-            <h1>Paul G.</h1>
-        </div>
-        <div class="row justify-content-end send">
-            <h2>Hi Sara! Nope, parking should be free at IKEA. Let me know if it isn't</h2>
-        </div>
-        <br>
-        <br>
-        <div class="row justify-content-start other">
-            <h1>Sara S.</h1>
-        </div>
-        <div class="recive row justify-content-start">
-            <h2>Oh ok, cool! Sounds good :D</h2>
-        </div>
-        
     </div>
     <div id="back-icon">
         <span class="material-icons" onclick="back()"
@@ -158,8 +134,8 @@
     <div class="row">
         <div class="col-lg-4 col-lg-offset-4">
             <div class="input-group mb-3 text-input">
-                <input type="text" class="form-control" placeholder="Enter Text Here">
-                <span class="input-group-text material-icons" id = "send">send</span>
+                <input type="text" class="form-control" placeholder="Enter Text Here" id = "textToSend">
+                <span class="input-group-text material-icons" id = "send" onclick="sendMessage()">send</span>
             </div>
         </div>
     </div>
@@ -167,9 +143,90 @@
 </body>
 </body>
 <script>
+    /*
+        Note: For sender class should have sender for message and recive for message
+        Note: For sender class should have sender for message and recive for message
+    */
+    
+    /*
+        Data Structure use is {
+            roomID -> [{
+                chatMessage : String;
+                userName : String;
+            }]
+        }
+    */
     var uid = Date.now() % 10000; // Use this to ID the user
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat');
+
+    var link = window.location.href;
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var userName = urlParams.get("username");
+    var chatRoomID = JSON.stringify(urlParams.get("chatRoomId"));
+    var chats = localStorage.getItem("chats");
+
+    var senderTag = "<div class='row justify-content-end sender'><h1>";
+    var senderMessageTag = "<div class='send row justify-content-end'><h2>"
+    var reciverTag = "<div class='row justify-content-start other'><h1>";
+    var rexiverMessageTag = "<div class='recive row justify-content-start'><h2>";
+    
+    function onLoad(){
+        if(chats != null){
+            chats = JSON.parse(chats);
+            if(chats[chatRoomID] != undefined){
+                var chatList = chats[chatRoomID];
+                for(var i = 0; i<chatList.length; i++){
+                    var chatElement = chatList[i];
+                    if(chatElement.username == userName){
+                        $(".container-fluid").append("<br><br>");
+                        $(".container-fluid").append(senderTag+chatElement.username+"</h1></div>");
+                        $(".container-fluid").append(senderMessageTag+chatElement.messageContent+"</h2></div>");
+                        $(".container-fluid").append("<br><br>");
+                    }else{
+                        $(".container-fluid").append("<br><br>");
+                        $(".container-fluid").append(reciverTag+chatElement.username+"</h1></div>");
+                        $(".container-fluid").append(rexiverMessageTag+chatElement.messageContent+"</h2></div>");
+                        $(".container-fluid").append("<br><br>");
+                    }
+                }
+            }
+        }
+    }
+
+    function sendMessage(){
+        let message = $("#textToSend").val();
+        let name = senderTag+userName+"</h1></div>";
+        let messageToAppend = senderMessageTag+message+"</h2></div>";
+        $(".container-fluid").append("<br><br>");
+        $(".container-fluid").append(name);
+        $(".container-fluid").append(messageToAppend);
+        $(".container-fluid").append("<br><br>");
+        var messageInfo = {
+            messageContent : message,
+            username : userName
+        }
+        if(chats == null || chats[chatRoomID] == undefined){
+            localStorage.setItem("chats",JSON.stringify({[chatRoomID] : [messageInfo]}));
+        }else{
+            var chatlist = chats[chatRoomID];
+            chatlist.push(messageInfo);
+            chats[chatRoomID] = chatlist;
+            localStorage.setItem("chats",JSON.stringify(chats));
+        }
+        socket.send(JSON.stringify(messageInfo));
+    }
+
+    socket.onmessage = function (receivedMessage) {
+        var received = JSON.parse(receivedMessage.data);
+        if (userName != received.username) {
+            $(".container-fluid").append("<br><br>");
+            $(".container-fluid").append(reciverTag + received.username + "</h1></div>");
+            $(".container-fluid").append(rexiverMessageTag + received.messageContent + "</h2></div>");
+            $(".container-fluid").append("<br><br>");
+        }
+    }
 
 </script>
 

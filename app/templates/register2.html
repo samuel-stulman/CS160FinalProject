@@ -46,30 +46,51 @@
             font-family: 'Titillium Web', sans-serif;
         }
 
-        .row.input {
-            width: 40rem;
+        .form-group {
             height: 20vh;
+        }
+
+        .row.form {
+            width: 40rem;
             margin-left: auto;
             margin-right: auto;
-            /* padding-bottom: 2rem; */
+            /* padding-top: 2rem; */
         }
 
-        .col-sm-12.input {
-            width: 100%;
-            /* border: 2px solid black; */
-            padding-right: 5rem;
-        }
-
-        .row.input p {
+        .skill-label {
             color: white;
             font-size: 2.5rem;
             font-family: 'Titillium Web', sans-serif;
         }
 
-        .col-sm-12.input {
-            background-color: #2F472F;
+        #skill1Input {
+            width: 40rem;
             height: 5rem;
-            border-radius: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #2F472F;
+            color: white;
+            font-size: 2rem;
+        }
+
+        #skill2Input {
+            width: 40rem;
+            height: 5rem;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #2F472F;
+            color: white;
+            font-size: 2rem;
+        }
+
+        #skill3Input {
+            width: 40rem;
+            height: 5rem;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #2F472F;
+            color: white;
+            font-size: 2rem;
         }
 
         .row.back-forward {
@@ -99,42 +120,24 @@
             </div>
         </div>
 
-        <form>
-            <div class="form-group">
-                <label for="skill1Input">Skill #1:</label>
-                <input type="text" class="form-control" id="skill1Input" placeholder="Enter Skill #1">
-            </div>
-
-            <div class="form-group">
-                <label for="skill2Input">Skill #2:</label>
-                <input type="text" class="form-control" id="skill2Input" placeholder="Enter Skill #2">
-            </div>
-
-            <div class="form-group">
-                <label for="skill3Input">Skill #3:</label>
-                <input type="text" class="form-control" id="skill3Input" placeholder="Enter Skill #3">
-            </div>
-        </form>
-        <!-- <div class="row input">
-            <p>Skill #1:</p>
-            <div class="col-sm-12 text-right input">
-                <span class="material-icons icon" style="color: white; font-size: 5rem; position: absolute;">arrow_drop_down</span>
-            </div>
+        <div class="row form">
+            <form>
+                <div class="form-group">
+                    <label for="skill1Input" class="skill-label">Skill #1:</label>
+                    <input type="text" class="form-control" id="skill1Input" placeholder="Enter Skill #1">
+                </div>
+    
+                <div class="form-group">
+                    <label for="skill2Input" class="skill-label">Skill #2:</label>
+                    <input type="text" class="form-control" id="skill2Input" placeholder="Enter Skill #2">
+                </div>
+    
+                <div class="form-group">
+                    <label for="skill3Input" class="skill-label">Skill #3:</label>
+                    <input type="text" class="form-control" id="skill3Input" placeholder="Enter Skill #3">
+                </div>
+            </form>
         </div>
-
-        <div class="row input">
-            <p>Skill #2:</p>
-            <div class="col-sm-12 text-right input">
-                <span class="material-icons icon" style="color: white; font-size: 5rem; position: absolute;">arrow_drop_down</span>
-            </div>
-        </div>
-
-        <div class="row input">
-            <p>Skill #3:</p>
-            <div class="col-sm-12 text-right input">
-                <span class="material-icons icon" style="color: white; font-size: 5rem; position: absolute;">arrow_drop_down</span>
-            </div>
-        </div> -->
 
         <div class="row back-forward">
             <div class="col-sm-5 back">

@@ -46,33 +46,54 @@
             font-family: 'Titillium Web', sans-serif;
         }
 
-        .row.input {
-            width: 40rem;
-            height: 25vh;
-            margin-left: auto;
-            margin-right: auto;
-            /* padding-bottom: 2rem; */
-        }
-
-        .row.input p {
+        .user-pass {
             color: white;
             font-size: 2.5rem;
             font-family: 'Titillium Web', sans-serif;
         }
 
-        .col-sm-12.input {
-            background-color: #2F472F;
+        .row.form {
+            width: 40rem;
+            margin-left: auto;
+            margin-right: auto;
+            /* padding-top: 2rem; */
+        }
+
+        #usernameInput {
+            width: 40rem;
             height: 5rem;
-            border-radius: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #2F472F;
+            color: white;
+            font-size: 2rem;
         }
 
-        .row.accept {
-            /* border: 2px solid black; */
+        #passwordInput {
+            width: 40rem;
+            height: 5rem;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #2F472F;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            height: 25vh;
+        }
+
+        .form-check {
             text-align: center;
-            padding-top: 2rem;
         }
 
-        .row.accept p {
+        input[type=checkbox] {
+            transform: scale(2);
+            padding-right: 10rem;
+        }
+
+        .form-check-label {
+            padding-left: 2rem;
             color: white;
             display: inline;
             font-size: 1.5rem;
@@ -105,39 +126,24 @@
             </div>
         </div>
 
-        <form>
-            <div class="form-group">
-                <label for="usernameInput">Username:</label>
-                <input type="username" class="form-control" id="usernameInput" placeholder="Enter Username">
-            </div>
-
-            <div class="form-group">
-                <label for="passwordInput">Username:</label>
-                <input type="password" class="form-control" id="passwordInput" placeholder="Enter Password">
-            </div>
-
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="checkInput">
-                <label class="form-check-label" for="checkInput">I have read and accept these <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Terms & Conditions</a></label>
-            </div>
-        </form>
-
-        <!-- <div class="row input">
-            <p>Username:</p>
-            <div class="col-sm-12 input"></div>
+        <div class="row form">
+            <form>
+                <div class="form-group">
+                    <label for="usernameInput" class="user-pass">Username:</label>
+                    <input type="username" class="form-control" id="usernameInput" placeholder="Enter Username">
+                </div>
+    
+                <div class="form-group">
+                    <label for="passwordInput" class="user-pass">Password:</label>
+                    <input type="password" class="form-control" id="passwordInput" placeholder="Enter Password">
+                </div>
+    
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="checkInput">
+                    <label class="form-check-label" for="checkInput">I have read and accept these <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Terms & Conditions</a></label>
+                </div>
+            </form>
         </div>
-
-        <div class="row input">
-            <p>Password:</p>
-            <div class="col-sm-12 input"></div>
-        </div>
-
-        <div class="row accept">
-            <div class="col-sm-12">
-                <span class="material-icons" style="color: white; font-size: 2.5rem;">check_box_outline_blank</span>
-                <p>&emsp; I have read and accept these <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Terms & Conditions</a></p>
-            </div>
-        </div> -->
 
         <div class="row back-forward">
             <div class="col-sm-5 back">
@@ -164,7 +170,7 @@
         var username = document.getElementById("usernameInput").value
         var password = document.getElementById("passwordInput").value
         var checkbox = document.getElementById("checkInput")
-        if (checkbox.checked && username != null && password != null) {
+        if (checkbox.checked && username !='' && password != '') {
             // localStorage.setItem("username", JSON.stringify(username))
             // localStorage.setItem("password", password)
             localStorage.setItem('username', username)

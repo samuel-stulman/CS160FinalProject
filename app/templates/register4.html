@@ -57,30 +57,51 @@
             font-family: 'Titillium Web', sans-serif;
         }
 
-        .row.input {
-            width: 40rem;
+        .form-group {
             height: 20vh;
+        }
+
+        .row.form {
+            width: 40rem;
             margin-left: auto;
             margin-right: auto;
-            /* padding-bottom: 2rem; */
+            /* padding-top: 2rem; */
         }
 
-        .col-sm-12.input {
-            width: 100%;
-            /* border: 2px solid black; */
-            padding-right: 5rem;
-        }
-
-        .row.input p {
+        .personal, .control-label{
             color: white;
             font-size: 2.5rem;
             font-family: 'Titillium Web', sans-serif;
         }
 
-        .col-sm-12.input {
-            background-color: #2F472F;
+        #nameInput {
+            width: 40rem;
             height: 5rem;
-            border-radius: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #2F472F;
+            color: white;
+            font-size: 2rem;
+        }
+
+        #date {
+            width: 40rem;
+            height: 5rem;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #2F472F;
+            color: white;
+            font-size: 2rem;
+        }
+
+        #bioInput {
+            width: 40rem;
+            height: 5rem;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #2F472F;
+            color: white;
+            font-size: 2rem;
         }
 
         .row.back-forward {
@@ -109,37 +130,26 @@
                 <p>4 of 4</p>
             </div>
         </div>
-        <form>
-            <div class="form-group">
-                <label for="nameInput">Name:</label>
-                <input type="text" class="form-control" id="nameInput" placeholder="Enter Name">
-            </div>
-            <div class="form-group">
-                <label class="control-label" for="date"> Birth Date:</label>
-                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
-            </div>
-            
 
-            <div class="form-group">
-                <label for="bioInput">Bio:</label>
-                <input type="text" class="form-control" id="bioInput" placeholder="Enter Bio">
-            </div>
-        </form>
-        <!-- <div class="row input">
-            <p>Name:</p>
-            <div class="col-sm-12 text-right input"></div>
+        <div class="row form">
+            <form>
+                <div class="form-group">
+                    <label for="nameInput" class="personal">Name:</label>
+                    <input type="text" class="form-control" id="nameInput" placeholder="Enter Name">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="date"> Birth Date:</label>
+                    <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+                </div>
+                
+    
+                <div class="form-group">
+                    <label for="bioInput" class="personal">Bio:</label>
+                    <input type="text" class="form-control" id="bioInput" placeholder="Enter Bio">
+                </div>
+            </form>
         </div>
-
-        <div class="row input">
-            <p>Birth Date:</p>
-            <div class="col-sm-12 text-right input"></div>
-        </div>
-
-        <div class="row input">
-            <p>Bio:</p>
-            <div class="col-sm-12 text-right input"></div>
-        </div> -->
-
+        
         <div class="row back-forward">
             <div class="col-sm-5 back">
                 <span class="material-icons" onclick="back()" style="color: white; font-size: 4rem; padding-left: 2rem; padding-top: 1rem;">arrow_back_ios</span>

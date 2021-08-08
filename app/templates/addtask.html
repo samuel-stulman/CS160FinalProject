@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Login</title>
+    <title>New Task</title>
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
@@ -20,15 +20,10 @@
             font-family: 'Titillium Web';
         }
 
-        .outer-wrapper {
-            height: 100vh;
-            width: 100%;
-        }
-
         .top-nav-bar {
             width: 100%;
             display: block;
-            position: fixed;
+            position: absolute;
             font-family: 'Quando';
         }
 
@@ -60,6 +55,7 @@
         .textinput-container-long {
             float: right;
             width: 100%;
+            margin-top: 1em;
         }
 
         .textinput-label {
@@ -96,10 +92,9 @@
             margin-left: 1em;
         }
 
-        #tag-list {
-            height: 20vh;
-            width: 100%;
+        .tag-list {
         }
+
 
         #blog-heading::placeholder {
             color: #f4f4f4;
@@ -117,28 +112,53 @@
             background-color: #2F472F;
             border-color: transparent;
             margin-top: 10px;
+
         }
 
         .submit-btn {
-            width: 385px;
+            width: 30%;
             height: 74px;
             border-radius: 15px;
-            margin: 0 auto;
-            background-color: #2F472F;
+            margin-top: 1em;
+            float: right;
+            background-color: rgb(241, 223, 223);
+            color: black;
             border-color: transparent;
-            display: block;
             font-size: 32px;
         }
+
         .submit-btn:hover {
             background-color: #2F472F;
             border-color: transparent;
         }
 
-        #new-subtask-btn {
+        .new-subtask-btn {
             float: right;
             height: 50px;
             line-height: 50px;
         }
+        
+        .taskinput {
+            height: 50px;
+            width: 95%;
+            background-color: transparent;
+            border: transparent;
+            color: white;
+            font-size: 24px;
+            float: left;
+        }
+
+        .taskinput:focus {
+            background-color: transparent;
+            border: transparent;
+            color: white;
+        }
+
+        .delete-task {
+            float: right;
+            font-size: 24px;
+        }
+
     </style>
 
 </head>
@@ -150,7 +170,7 @@
             </div>
         </div>
         <br/><br/><br/>
-        <h1 style="margin-left: 2%; color: white;">Add Task</h1>
+        <h1 style="margin-left: 2%; color: white; font-weight: bold;">Add Task</h1>
         <div class="form-container">
             <div id="photo-upload">
                 Photo
@@ -159,7 +179,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Date and Time: </span>
                 </div>
-                <input type="date" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                <input type="date" id="task-date" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                <input type="time" id="task-time" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div>
             <br/>
             <br/>
@@ -169,63 +190,70 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Task name: </span>
                 </div>
-                <input type="text" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                <input type="text" class="form-control textinput" id="task-header" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div>
-            <br/><br/><br/><br/><br/><br/><br/><br/>
             <div class="input-group input-group-lg textinput-container-long">
                 <div class="input-group-prepend">
                   <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Description: </span>
                 </div>
-                <input type="text" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                <input type="text" class="form-control textinput" id="task-description" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div>
             <br/>            <br/>            <br/>
             <h2 style="float: left;">Subtasks</h2>
-            <div id="new-subtask-btn">
+            <div class="new-subtask-btn">
+                <a id="add-subtask-btn">
+                    <span class="material-icons material-icons-outlined">
+                        add
+                    </span>
+                </a>
+            </div>
+            <br/>
+            <br/>
+            <div class="tag-list" id="task-list">
+                <div class="task-item" id="task-item-0">
+                    <input type="text" class="form-control taskinput" id="task-0" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="new task"> 
+                    <a id='delete-0' class="delete-task" onclick="deleteSubTask(this.id)">
+                        <span class="material-icons material-icons-outlined">
+                            close
+                        </span>
+                    </a>
+                </div>
+            </div> 
+            <br/>
+            <br/>
+            <h2 style="float: left; margin-top: 1em;">Benefits</h2>
+            <div class="new-subtask-btn" id="new-benefit-btn" style="margin-top: 1em;">
                 <span class="material-icons material-icons-outlined">
                     add
                 </span>
             </div>
             <br/>
             <br/>
-            <div id="tag-list">
-                <div class="task-item">
-                    Task 1
+            <br/>
+            <div class="tag-list" id="benefit-list">
+                <div class="task-item" id="benefit-item-0">
+                    <input type="text" class="form-control taskinput" id="benefit-0" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="New Benefit"> 
+                    <a id="delete-0" onclick="deleteBenefit(this.id)" class="delete-task">
+                        <span class="material-icons material-icons-outlined">
+                            close
+                        </span>
+                    </a>
                 </div>
-                <div class="task-item">
-                    Task 2
-                </div>
-                <div class="task-item">
-                    Task 3
-                </div>
-                <div class="task-item">
-                    Task 4
-                </div>
-            </div>
-            <br/>       
-            <h2 style="float: left;">Benefits</h2>
-            <div id="new-subtask-btn">
-                <span class="material-icons material-icons-outlined">
-                    add
-                </span>
             </div>
             <br/>
             <br/>
-            <div id="tag-list">
-                <div class="task-item">
-                    Benefit 1
-                </div>
-                <div class="task-item">
-                    Benefit 2
-                </div>
-            </div>
             <br/>
-            <button type="button" class="btn btn-primary submit-btn">Submit</button>
+            <div style="height: 74px; line-height: 74px; font-weight: bold;">
+                <p id="error" style="float: left; color: rgb(197, 67, 67);"></p>
+                <button type="button" id="create-task-btn" class="btn btn-primary submit-btn">Submit</button>
+            </div>
+            
         </div>
     </div>
 
 </body>
 <script>
-    var uid = Date.now() % 10000; // Use this to ID the user
+    var uid = Date.now() % 10000; // Use this to ID the task
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat');
         var longitude = -73.961452;
@@ -239,10 +267,166 @@
         longitude = pos.coords.longitude
         latitude = pos.coords.latitude
     });        
+    let numTasks = 1
+    let numBenefits = 1
     // One - Off
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apikey}`).then(resp => resp.json()).then(data => {
         console.log(data) 
         // Process location
     })
+    
+    function createNewSubTask(id) {
+        let task = `<div class="task-item" id="task-item-${id}">
+                    <input type="text" class="form-control taskinput" id="task-${id}" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="new task"> 
+                    <a id='delete-${id}' class="delete-task" onclick="deleteSubTask(this.id)">
+                        <span class="material-icons material-icons-outlined">
+                            close
+                        </span>
+                    </a>
+                </div>`
+        return task
+    }
+
+    function parseId(id) {
+        let splits = id.split('-')
+        return splits[1]
+    }
+
+    function deleteSubTask(id) {
+        // Parse the subtask id
+        let taskId = parseId(id)
+        $('#task-item-' + taskId).remove();
+    }
+
+
+    function deleteBenefit(id) {
+        // Parse the subtask id
+        let benefitId = parseId(id)
+        $('#benefit-item-' + benefitId).remove();
+    }
+
+    function createNewBenefit(id) {
+        let benefit = ` <div class="task-item" id="benefit-item-${id}">
+                    <input type="text" class="form-control taskinput" id="benefit-${id}" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="New Benefit"> 
+                    <a id="delete-${id}" onclick="deleteBenefit(this.id)" class="delete-task">
+                        <span class="material-icons material-icons-outlined">
+                            close
+                        </span>
+                    </a>
+                </div>`
+        return benefit
+
+    }
+
+
+    $('#add-subtask-btn').click(() => {
+        $('#task-list').append(
+            createNewSubTask(numTasks)
+        )
+        numTasks = numTasks + 1
+    })
+
+
+    $('#new-benefit-btn').click(() => {
+        $('#benefit-list').append(
+            createNewBenefit(numBenefits)
+        )
+        numBenefits = numBenefits + 1
+    })
+
+    function isValidData() {
+        let date = $('#task-date').val()
+        let time = $('#task-time').val()
+        let header = $('#task-header').val()
+        let description = $('#task-description').val()
+        if (date.length == 0) {
+            $('#error').text("error with date")
+            $('#error').show()
+            return false
+        }
+        if (time.length == 0) {
+            $('#error').text("error with time")
+            $('#error').show()
+            return false
+        }
+        if (header.length == 0) {
+            $('#error').text("error with task name")
+            $('#error').show()
+            return false
+        }
+        if (description.length == 0) {
+            $('#error').text("error with description")
+            $('#error').show()
+            return false
+        }
+        // Check if the user is real
+        /*
+        if (localStorage.getItem('username') == null) {
+            $('#error').text("unauthorized access")
+            $('#error').show()
+            return false
+        }
+        */
+        $('#error').hide()
+        return true
+
+    }
+
+
+    $('#create-task-btn').click(() => {
+        let subtasks = []
+        let benefits = []
+        for (let i=0; i <= numTasks; i++) {
+            if ($('#task-' + i.toString()).length) {
+                // Task exists
+                let task = $('#task-' + i.toString()).val()
+                if (task.length > 0) {
+                    subtasks.push($('#task-' + i.toString()).val())
+                }
+            }
+        }
+
+        for (let i=0; i < numBenefits; i++) {
+            if ($('#benefit-' + i.toString()).length) {
+                // Task exists
+                let benefit = $('#benefit-' + i.toString()).val()
+                if (benefit.length > 0) {
+                    benefits.push($('#benefit-' + i.toString()).val())
+                }
+                
+            }
+        }
+        // Error checkin
+        if (isValidData()) {
+            let task = {
+            type: 'task',
+            id: uid,
+            date: $('#task-date').val(),
+            time: $('#task-time').val(),
+            header: $('#task-header').val(),
+            description: $('#task-description').val(),
+            benefits: benefits,
+            subtasks: subtasks, 
+            //author: localStorage.getItem('username') // Store the author of the post
+            }
+            localStorage.setItem('task_' + uid.toString(), JSON.stringify(task))
+            location.reload();
+        }
+        //localStorage.setItem('task_' + uid.toString, task)
+        // Broadcast to websocket the new task
+    })
+
+
+    let task = {
+        type: 'task',
+        date: '',
+        time: '',
+        header: '',
+        description: '',
+        benefits: [],
+        subtasks: []
+    }
+
+    
 </script>
 </html>

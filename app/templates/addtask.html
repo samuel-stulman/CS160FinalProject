@@ -613,7 +613,7 @@
             return false
         }
         // Check if the user is real
-        if (localStorage.getItem('username') == null || localStorage.getItem('username') == undefined) {
+        if (sessionStorage.getItem('username') == null || sessionStorage.getItem('username')== undefined) {
             $('#error').text("unauthorized access")
             $('#error').show()
             return false
@@ -666,7 +666,7 @@
                 posted_time: getPostedDate(),
                 task_tags: Array.from(selected_tags),
                 chat_id: 'room' + uid,
-                author: localStorage.getItem('username') // Store the author of the post
+                author: sessionStorage.getItem('username')// Store the author of the post
             }
             var posts = []
             console.log(task)

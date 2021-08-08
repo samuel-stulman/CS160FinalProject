@@ -28,7 +28,7 @@
         .top-nav-bar {
             width: 100%;
             display: block;
-            position: fixed;
+            position: absolute;
             font-family: 'Quando';
         }
 
@@ -123,15 +123,19 @@
             margin-top: 10px;
         }
 
+        .list-item:hover {
+            background-color: #5dc05d;
+        }
+
         .submit-btn {
             width: 385px;
             height: 74px;
             border-radius: 15px;
-            margin: 0 auto;
             background-color: #2F472F;
             border-color: transparent;
             display: block;
             font-size: 32px;
+            float: right;
         }
         .submit-btn:hover {
 
@@ -158,14 +162,14 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Blog Post Heading: </span>
                 </div>
-                <input type="text" placeholder="test" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                <input type="text" id="blog-header" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             <div class="input-group input-group-lg textinput-container-long">
                 <div class="input-group-prepend">
                   <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Add Text: </span>
                 </div>
-                <input type="text" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                <input type="text" id="blog-text" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div>
             <br/>            <br/>            <br/>
             <h2 style="float: left;">Community Tags</h2>
@@ -173,7 +177,10 @@
             <br/>
             <div id="tag-list">
             </div>
-            <button type="button" class="btn btn-primary submit-btn">Submit</button>
+            <div style="height: 74px; line-height: 74px; font-weight: bold;">
+                <p id="error" style="float: left; color: rgb(197, 67, 67);"></p>
+                <button type="button" id="create-blog-btn" class="btn btn-primary submit-btn">Submit</button>
+            </div>
         </div>
 
    </div>
@@ -194,12 +201,85 @@
         'Palo Alto, CA',
     ]
 
+    var selected_tags = new Set()
+
+    function parseId(id) {
+        let splits = id.split('-')
+        return splits[1]
+    }
+
+    $(".list-item").toggle(() => {
+        console.log(this)
+    });
+
+
+    function toggleTag(id) {
+        let tagID = parseId(id)
+        let tagContent = $(`#tag-${tagID}`).text()
+        if (selected_tags.has(tagContent)) {
+            $(`#tag-${tagID}`).css('background-color', '#2F472F')
+            selected_tags.delete($(`#tag-${tagID}`).text())
+        } else {
+            $(`#tag-${tagID}`).css('background-color', '#5dc05d')
+            selected_tags.add($(`#tag-${tagID}`).text())
+        }
+        console.log(selected_tags)
+       
+    }
+
     // Populate the selector with tags
+    let i = 0
     COMMUNITY_TAGS.forEach(el => {
-        let new_item = '<div class="list-item">' +
+        let new_item = `<div class="list-item" id="tag-${i}" onclick="toggleTag(this.id)">` +
                    el +
                 '</div>'
         $('#tag-list').append(new_item)
+        i += 1
+    })
+
+    function isValidData() {
+        let header = $('#blog-header').val()
+        let description = $('#blog-text').val()
+        if (header.length == 0) {
+            $('#error').text("error with post heading")
+            $('#error').show()
+            return false
+        }
+        if (description.length == 0) {
+            $('#error').text("error with blog text")
+            $('#error').show()
+            return false
+        }
+        // Check if the user is real
+        /*
+        if (localStorage.getItem('username') == null) {
+            $('#error').text("unauthorized access")
+            $('#error').show()
+            return false
+        }
+        */
+        $('#error').hide()
+        return true
+
+    }
+
+    $('#create-blog-btn').click(() => {
+        if (isValidData()) {
+            let blog = {
+                type: 'blog',
+                id: uid,
+                header: $('#blog-header').val(),
+                description: $('#blog-text').val(),
+                benefits: [],
+                subtasks: [],
+                tags: Array.from(selected_tags)
+                //author: localStorage.getItem('username') // Store the author of the post
+            }
+            localStorage.setItem('blog_' + uid.toString, JSON.stringify(blog))
+            //console.log(blog)
+            // TODO Broadcast via websocket. 
+        }
+
     })
 
 

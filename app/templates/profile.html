@@ -131,12 +131,16 @@
         }
 
         .row.bio {
-            background-color: #2F472F; 
-            border-radius: 20px; 
             margin-left: 10%;
             margin-right: 10%;
             margin-bottom: 2rem;
-            /* height: 33vh; */
+            height: 20vh;
+        }
+
+        .row.bio-inner {
+            padding: 1rem;
+            background-color: #2F472F; 
+            border-radius: 20px;
         }
 
         .row.bio p {
@@ -146,17 +150,22 @@
         }
 
         .row.skills {
-            margin-bottom: 2rem;
+            /* margin-bottom: 2rem; */
             margin-left: 2rem;
             margin-right: 2rem;
+            margin-bottom: 2rem;
+            height: 20vh;
+            margin-top: auto;
+            margin-bottom: auto;
+            display: flex;
+            align-items: center;
         }
 
         .col-sm-2.skill {
             background-color: #2F472F; 
             border-radius: 20px; 
             margin-right: 1rem;
-            margin-top: auto;
-            margin-bottom: auto;
+            
             
         }
 
@@ -174,6 +183,7 @@
             margin-bottom: auto;
             display: flex;
             align-items: center;
+            height: 10vh;
         }
 
         .col-sm-2.community{
@@ -284,12 +294,15 @@
 
         <div class="row bio">
             <div class="col-sm-12">
-                <p id="bio">Bio: </p>
+                <div class="row bio-inner">
+                    <p id="bio">Bio: </p>
+                </div>
+                
             </div>
         </div>
 
         <div class="row skills">
-            <div class="col-sm-3" style="font-family: 'Titillium Web'; color: white; font-size: 2rem;">
+            <div class="col-sm-2" style="font-family: 'Titillium Web'; color: white; font-size: 2rem;">
                 <p>Skills:</p>
             </div>
             <div class="col-sm-2 text-center skill">

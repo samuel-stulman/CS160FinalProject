@@ -12,11 +12,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    
     <style type="text/css">
         body{
             background-color: #439B3B;
             font-family: 'Titillium Web', sans-serif;
         }
+
+        .nav-burger {
+            width: 100%;
+            /* float:right; 
+            margin-left: 95%; 
+            margin-top: -2%; */
+            /* border: 2px solid black; */
+        }
+
+        .link {
+            /* font-family: Titillium Web;  */
+            color: #009aeb; 
+            text-align: center;
+        }
+
         .row.app-name p {
             color: white;
             font-size: 2rem;
@@ -63,8 +84,79 @@
 <body>
     <div class = "container-fluid">
         <div class="row app-name">
-            <div class="col-sm-12 app-name">
+            <div class="col-sm-6 app-name">
                 <p>Auxilium</p>
+            </div>
+
+            <div class="col-sm-6 text-right nav-burger">
+                <a href="#" data-toggle="modal" data-target="#staticBackdrop">
+                    <div class="row">
+                        <div class="col-sm-12 text-right">
+                            <span class="material-icons" id="burger"style="color: white; font-size: 50px;">menu</span>
+                        </div>
+                    </div>
+                </a>
+    
+                <div class ="modal fade" id="staticBackdrop" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <a class="close" href="">&times;</a>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/feed">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Home Feed</p>
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/newtask">
+                                       <p class="link" style="color: #009aeb; font-family: Titillium Web;">Request Help</p>
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/newblog">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Add Blog Post</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/todo">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">To-Do Tasks</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/profile">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Profile</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/privacy">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Privacy</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/settings">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Settings</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/help">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Contact Us</p>
+                                    </a>
+                                    
+                                </div>
+                                <div class="content">
+                                    <a href="http://localhost:8000/app/about">
+                                        <p class="link" style="color: #009aeb; font-family: Titillium Web;">Help and About</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class = "row col-sm-12">
@@ -138,5 +230,13 @@
     let back = () => {
         window.location.href = "/app/";
     }
+
+    if (sessionStorage.getItem('username')) {
+        document.getElementById("back-icon").style.display = 'none';
+    } else {
+        document.getElementById("burger").style.display = 'none';
+    }
+    
+    
 </script>
 </html>

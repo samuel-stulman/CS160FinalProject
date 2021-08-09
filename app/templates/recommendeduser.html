@@ -1,0 +1,241 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Recommended Users</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+        .overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .overlay:target {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 30%;
+            position: relative;
+            transition: all 5s ease-in-out;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            color: #333;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 40px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .popup .content {
+            max-height: 30%;
+            overflow: auto;
+            font-size: 40px;
+        }
+
+        @media screen and (max-width: 700px) {
+            .box {
+                width: 70%;
+            }
+
+            .popup {
+                width: 70%;
+            }
+        }
+
+        .div_btn{
+            background-color:#2F472F;
+            color:white;
+        }
+
+        .div_btn:hover{
+            background-color:#dae2da;
+            color:black;
+        }
+    </style>
+
+</head>
+
+<body style="background-color:#439B3B">
+    <div style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%">
+        Auxilium
+    </div>
+
+    <div style="float:right; margin-left: 95%; margin-top: -2%">
+        <a href="#popup1">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Hamburger_icon_white.svg/1024px-Hamburger_icon_white.svg.png"
+                width=50% height=50%>
+        </a>
+
+    </div>
+
+    <div id="popup1" class="overlay">
+        <div class="popup">
+            <a class="close" href="#">&times;</a>
+            <br>
+            <br>
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid;">
+                <a href="http://localhost:8000/app/feed">
+                    <p style="margin-left:5%">
+                        Home Feed
+                    </p>
+                </a>
+            </div>
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
+                <a href="http://localhost:8000/app/newtask">
+                    <p style="margin-left:5%">
+                        Request Help
+                    </p>
+                </a>
+            </div>
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
+                <a href="http://localhost:8000/app/newblog">
+                    <p style="margin-left:5%">
+                        Add Blog Post
+                    </p>
+                </a>
+            </div>
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
+                <a href="http://localhost:8000/app/todo">
+                    <p style="margin-left:5%">
+                        To-Do Tasks
+                    </p>
+                </a>
+            </div>
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
+                <a href="http://localhost:8000/app/profile">
+                    <p style="margin-left:5%">
+                        Profile
+                    </p>
+                </a>
+            </div>
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
+                <a href="http://localhost:8000/app/privacy">
+                    <p style="margin-left:5%">
+                        Privacy
+                    </p>
+                </a>
+            </div>
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
+                <a href="http://localhost:8000/app/settings">
+                    <p style="margin-left:5%">
+                        Settings
+                    </p>
+                </a>
+            </div>
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
+                <a href="http://localhost:8000/app/help">
+                    <p style="margin-left:5%">
+                        Contact Us
+                    </p>
+                </a>
+            </div>
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
+                <a href="http://localhost:8000/app/about">
+                    <p style="margin-left:5%">
+                        Help and About
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div style="color: white; font-size: 48px; font-family: 'Titillium Web'; margin-left: 2%; margin-top: 1%">
+        Recommended Users
+    </div>
+
+    <div style="float:left; margin-left: 15%; margin-top: 5%; ">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Guy_Pearce_Cannes_2012_%28revised%29.jpg" width="300px" height="400px" style="border-radius: 30px">
+        <p style="color:white; font-family: Titillium Web; font-size: 30px; text-align:center; margin-top: 3%">
+            Parker Y.
+        </p>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <div class="div_btn" style="font-size: 20px; font-family:Titillium Web; text-align:center; width: 80%; border-radius: 20px">
+                View Profile
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 4%">
+            <div class="div_btn" style="font-size: 20px; font-family:Titillium Web; text-align:center; width: 80%; border-radius: 20px">
+                Invite
+            </div>
+        </div>
+        
+    </div>
+
+    <div style="float:left; margin-left: 10%; margin-right: 10%; margin-top: 5%; ">
+        <img src="https://faculty.wharton.upenn.edu/wp-content/uploads/2016/11/F_David_Guy_IMG_0201a.jpg" width="300px" height="400px" style="border-radius: 30px">
+        <p style="color:white; font-family: Titillium Web; font-size: 30px; text-align:center; margin-top: 3%">
+            Jorge C. 
+        </p>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <div class="div_btn" style="font-size: 20px; font-family:Titillium Web; text-align:center; width: 80%; border-radius: 20px">
+                View Profile
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 4%">
+            <div class="div_btn" style="font-size: 20px; font-family:Titillium Web; text-align:center; width: 80%; border-radius: 20px">
+                Invite
+            </div>
+        </div>
+        
+    </div>
+
+    <div style="float:left; margin-top: 5%; ">
+        <img src="https://www.goredforwomen.org/-/media/grfw-images/about-heart-disease/real-women-2021/real_woman_lindsey_huie_vert.jpg?h=302&la=en&mh=302&mw=450&w=247&hash=F158BAA166ECE938D8F37D42257BD0A50B3AED47" width="300px" height="400px" style="border-radius: 30px">
+        <p style="color:white; font-family: Titillium Web; font-size: 30px; text-align:center; margin-top: 3%">
+            Denice A.
+        </p>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <div class="div_btn" style="font-size: 20px; font-family:Titillium Web; text-align:center; width: 80%; border-radius: 20px">
+                View Profile
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 4%">
+            <div class="div_btn" style="font-size: 20px; font-family:Titillium Web; text-align:center; width: 80%; border-radius: 20px">
+                Invite
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+<script>
+    var uid = Date.now() % 10000; // Use this to ID the user
+    var socket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat');
+
+</script>
+
+</html>

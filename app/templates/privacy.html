@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Login</title>
+    <title>Privacy</title>
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
@@ -34,7 +34,7 @@
             padding: 20px;
             background: #fff;
             border-radius: 5px;
-            width: 50%;
+            width: 30%;
             position: relative;
             transition: all 5s ease-in-out;
         }
@@ -69,7 +69,7 @@
     </style>
 
 </head>
-<body style="background-color:#439B3B;">
+<body style="background-color:#439B3B; background-image: url('https://i.ibb.co/xJRGNJc/Screen-Shot-2021-08-09-at-10-17-00-AM.png'); background-size: 100% 100%;">
     <div style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%">
         Auxilium
     </div>
@@ -84,57 +84,70 @@
     <div id="popup1" class="overlay">
         <div class="popup">
             <a class="close" href="#">&times;</a>
-            <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+            <br>
+            <br>
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid;">
                 <a href="http://localhost:8000/app/feed">
-                    Home Feed
+                    <p style="margin-left:5%">
+                        Home Feed
+                    </p>
                 </a>
             </div>
-            <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
-                <a href="http://localhost:8000/app/addtask">
-                    Request Help
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
+                <a href="http://localhost:8000/app/newtask">
+                    <p style="margin-left:5%">
+                        Request Help
+                    </p>
                 </a>
             </div>
-            <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
-                <a href="http://localhost:8000/app/blog">
-                    Add Blog Post
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
+                <a href="http://localhost:8000/app/newblog">
+                    <p style="margin-left:5%">
+                        Add Blog Post
+                    </p>
                 </a>
-                
             </div>
-            <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                 <a href="http://localhost:8000/app/todo">
-                    To-Do Tasks
+                    <p style="margin-left:5%">
+                        To-Do Tasks
+                    </p>
                 </a>
-                
             </div>
-            <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                 <a href="http://localhost:8000/app/profile">
-                    Profile
+                    <p style="margin-left:5%">
+                        Profile
+                    </p>
                 </a>
-                
             </div>
-            <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                 <a href="http://localhost:8000/app/privacy">
-                    Privacy
+                    <p style="margin-left:5%">
+                        Privacy
+                    </p>
                 </a>
-                
             </div>
-            <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                 <a href="http://localhost:8000/app/settings">
-                    Settings
+                    <p style="margin-left:5%">
+                        Settings
+                    </p>
                 </a>
-                
             </div>
-            <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                 <a href="http://localhost:8000/app/help">
-                    Contact Us
+                    <p style="margin-left:5%">
+                        Contact Us
+                    </p>
                 </a>
-                
             </div>
-            <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+            <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                 <a href="http://localhost:8000/app/about">
-                    Help and About
+                    <p style="margin-left:5%">
+                        Help and About
+                    </p>
                 </a>
-                
             </div>
         </div>
     </div>
@@ -143,6 +156,7 @@
         Privacy
     </div>
 
+    <br><br>
     <div style="display: flex; justify-content: center; align-items: center; margin-top: 5%">
         <div style="background-color: #2F472F; width: 90%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; ">
             Verify My Profile

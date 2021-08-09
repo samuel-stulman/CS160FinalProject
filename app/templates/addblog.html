@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>New Blog</title>
@@ -69,13 +70,13 @@
         }
 
         .textinput {
-            background-color:#2F472F;
+            background-color: #2F472F;
             border-color: #2F472F;
-            color: white; 
+            color: white;
         }
 
         .textinput:focus {
-            background-color:#2F472F;
+            background-color: #2F472F;
             border-color: #2F472F;
             color: white;
         }
@@ -83,7 +84,7 @@
         .textinput::placeholder {
             color: red;
         }
-        
+
 
         #blog-heading {
             width: 50vw;
@@ -91,7 +92,7 @@
             background-color: #2F472F;
             border-color: #2F472F;
             color: white;
-            
+
         }
 
         .dropdown-select {
@@ -138,6 +139,7 @@
             float: right;
             margin-left: 15px;
         }
+
         .submit-btn:hover {
 
             background-color: #49b849;
@@ -153,11 +155,11 @@
             display: block;
             font-size: 32px;
             text-align: center;
-            float:right;
+            float: right;
             color: white;
             text-decoration: none;
         }
-        
+
         #success-modal {
             height: 400px;
             width: 500px;
@@ -182,7 +184,7 @@
             padding: 15px;
             border-radius: 5px;
             background-color: green;
-            color:white;
+            color: white;
             text-decoration: none;
         }
 
@@ -198,25 +200,29 @@
             opacity: 0;
             z-index: 1;
         }
+
         .overlay:target {
             visibility: visible;
             opacity: 1;
         }
+
         .popup {
             margin: 70px auto;
             padding: 20px;
             background: #fff;
             border-radius: 5px;
-            width: 50%;
+            width: 30%;
             position: relative;
             transition: all 5s ease-in-out;
-            
+
         }
+
         .popup h2 {
             margin-top: 0;
             color: #333;
             font-family: Tahoma, Arial, sans-serif;
         }
+
         .popup .close {
             position: absolute;
             top: 20px;
@@ -227,15 +233,18 @@
             text-decoration: none;
             color: #333;
         }
+
         .popup .content {
             max-height: 30%;
             overflow: auto;
             font-size: 40px;
         }
+
         @media screen and (max-width: 700px) {
             .box {
                 width: 70%;
             }
+
             .popup {
                 width: 70%;
             }
@@ -243,126 +252,146 @@
     </style>
 
 </head>
+
 <body>
-   <div class="outer-wrapper">
+    <div class="outer-wrapper">
         <div class="top-nav-bar">
-            <a href="./feed" style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left; text-decoration: none;">
+            <a href="./feed"
+                style="color: white; font-size: 2rem; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left; text-decoration: none;">
                 Auxilium
             </a>
             <div style="float:right; margin-right: 20px;">
                 <a href="#popup1">
                     <span class="material-icons" style="color: white; font-size: 50px;">
                         menu
-                        </span>
+                    </span>
                 </a>
             </div>
             <div id="popup1" class="overlay">
                 <div class="popup">
                     <a class="close" href="#">&times;</a>
-                    <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+                    <br>
+                    <br>
+                    <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid;">
                         <a href="http://localhost:8000/app/feed">
-                            Home Feed
+                            <p style="margin-left:5%">
+                                Home Feed
+                            </p>
                         </a>
                     </div>
-                    <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+                    <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                         <a href="http://localhost:8000/app/newtask">
-                            Request Help
+                            <p style="margin-left:5%">
+                                Request Help
+                            </p>
                         </a>
                     </div>
-                    <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+                    <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                         <a href="http://localhost:8000/app/newblog">
-                            Add Blog Post
+                            <p style="margin-left:5%">
+                                Add Blog Post
+                            </p>
                         </a>
-                        
                     </div>
-                    <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+                    <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                         <a href="http://localhost:8000/app/todo">
-                            To-Do Tasks
+                            <p style="margin-left:5%">
+                                To-Do Tasks
+                            </p>
                         </a>
-                        
                     </div>
-                    <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+                    <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                         <a href="http://localhost:8000/app/profile">
-                            Profile
+                            <p style="margin-left:5%">
+                                Profile
+                            </p>
                         </a>
-                        
                     </div>
-                    <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+                    <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                         <a href="http://localhost:8000/app/privacy">
-                            Privacy
+                            <p style="margin-left:5%">
+                                Privacy
+                            </p>
                         </a>
-                        
                     </div>
-                    <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+                    <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                         <a href="http://localhost:8000/app/settings">
-                            Settings
+                            <p style="margin-left:5%">
+                                Settings
+                            </p>
                         </a>
-                        
                     </div>
-                    <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+                    <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                         <a href="http://localhost:8000/app/help">
-                            Contact Us
+                            <p style="margin-left:5%">
+                                Contact Us
+                            </p>
                         </a>
-                        
                     </div>
-                    <div class="content" style="font-family:Titillium Web; color:white; text-align:center">
+                    <div class="content" style="font-family:Titillium Web; color:white; border-width: 4px; border-color: black; border-style:solid; margin-top:-1%">
                         <a href="http://localhost:8000/app/about">
-                            Help and About
+                            <p style="margin-left:5%">
+                                Help and About
+                            </p>
                         </a>
                     </div>
                 </div>
             </div>
-        
-        </div>
-        <br/><br/><br/>
-        <h1 style="margin-left: 2%; color: white;">Add Blog Post</h1>
-        <div class="form-container">
-            <div id="photo-upload">
-                <img src="https://static.thenounproject.com/png/1967620-200.png" height="100" width="100">
-            </div>
-            <div class="input-group input-group-lg textinput-container">
-                <div class="input-group-prepend">
-                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Blog Post Heading: </span>
-                </div>
-                <input type="text" id="blog-header" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-            </div>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-            <div class="input-group input-group-lg textinput-container-long">
-                <div class="input-group-prepend">
-                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Add Text: </span>
-                </div>
-                <input type="text" id="blog-text" class="form-control textinput" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-            </div>
-            <br/>            <br/>            <br/>
-            <h2 style="float: left;">Community Tags</h2>
-            <br/>
-            <br/>
-            <div id="tag-list">
-            </div>
-            <div style="height: 74px; line-height: 74px; font-weight: bold; margin-left: 50px; margin-right: 50px;">
-                <p id="error" style="float: left; color: rgb(197, 67, 67);"></p>
-                <button type="button" id="create-blog-btn" class="btn btn-primary submit-btn">Submit</button>
-                <a href="https://www.wordstream.com/blog/ws/2015/02/09/how-to-write-a-blog-post" id="blog-tutorial-btn">See blog post tutorial</a>
-                
-            </div>
-            <div id="success-modal">
-                <h1>Successfully Posted!</h1>
-                <img src="https://d1j8pt39hxlh3d.cloudfront.net/uploads/party_face_256_1.gif" height="250" width="250">
-                <div style="width: 100%; padding-left: 25px; padding-right: 25px;">
-                    <a class="modal-btn" href="./feed" style="float: left; background-color: yellowgreen;">
-                        Return to Feed
-                    </a>
-                    <a class="modal-btn" onclick="location.reload()" style="float: right;">
-                        Create another post
-                    </a>
-                </div>
-                
-            </div>
+                <br /><br /><br />
+                <h1 style="margin-left: 2%; color: white;">Add Blog Post</h1>
+                <div class="form-container">
+                    <div id="photo-upload">
+                        <img src="https://static.thenounproject.com/png/1967620-200.png" height="100" width="100">
+                    </div>
+                    <div class="input-group input-group-lg textinput-container">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Blog Post Heading:
+                            </span>
+                        </div>
+                        <input type="text" id="blog-header" class="form-control textinput" aria-label="Large"
+                            aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                    <div class="input-group input-group-lg textinput-container-long">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Add Text: </span>
+                        </div>
+                        <input type="text" id="blog-text" class="form-control textinput" aria-label="Large"
+                            aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <br /> <br /> <br />
+                    <h2 style="float: left;">Community Tags</h2>
+                    <br />
+                    <br />
+                    <div id="tag-list">
+                    </div>
+                    <div
+                        style="height: 74px; line-height: 74px; font-weight: bold; margin-left: 50px; margin-right: 50px;">
+                        <p id="error" style="float: left; color: rgb(197, 67, 67);"></p>
+                        <button type="button" id="create-blog-btn" class="btn btn-primary submit-btn">Submit</button>
+                        <a href="https://www.wordstream.com/blog/ws/2015/02/09/how-to-write-a-blog-post"
+                            id="blog-tutorial-btn">See blog post tutorial</a>
+
+                    </div>
+                    <div id="success-modal">
+                        <h1>Successfully Posted!</h1>
+                        <img src="https://d1j8pt39hxlh3d.cloudfront.net/uploads/party_face_256_1.gif" height="250"
+                            width="250">
+                        <div style="width: 100%; padding-left: 25px; padding-right: 25px;">
+                            <a class="modal-btn" href="./feed" style="float: left; background-color: yellowgreen;">
+                                Return to Feed
+                            </a>
+                            <a class="modal-btn" onclick="location.reload()" style="float: right;">
+                                Create another post
+                            </a>
+                        </div>
+
+                    </div>
 
 
-        </div>
+                </div>
 
-   </div>
+            </div>
 
 </body>
 <script>
@@ -370,7 +399,7 @@
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat');
     $('#success-modal').hide()
-    const COMMUNITY_TAGS = [   
+    const COMMUNITY_TAGS = [
         'Berkeley, CA',
         'UC Berkeley',
         'Food Shelter',
@@ -406,7 +435,7 @@
             selected_tags.add($(`#tag-${tagID}`).text())
         }
         console.log(selected_tags)
-       
+
     }
 
     function getPostedDate() {
@@ -430,8 +459,8 @@
     let i = 0
     COMMUNITY_TAGS.forEach(el => {
         let new_item = `<div class="list-item" id="tag-${i}" onclick="toggleTag(this.id)">` +
-                   el +
-                '</div>'
+            el +
+            '</div>'
         $('#tag-list').append(new_item)
         i += 1
     })
@@ -450,13 +479,13 @@
             return false
         }
         // Check if the user is real
-        
-        if (sessionStorage.getItem('username')== null ||sessionStorage.getItem('username')== undefined) {
+
+        if (sessionStorage.getItem('username') == null || sessionStorage.getItem('username') == undefined) {
             $('#error').text("unauthorized access")
             $('#error').show()
             return false
         }
-        
+
         $('#error').hide()
         return true
 
@@ -499,4 +528,5 @@
 
 
 </script>
+
 </html>

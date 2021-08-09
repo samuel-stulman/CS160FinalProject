@@ -5,7 +5,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Login</title>
+    <title>Profile</title>
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
@@ -76,6 +76,8 @@
             /* font-family: Titillium Web;  */
             color: #009aeb; 
             text-align: center;
+            border: 2px solid black;
+            margin-bottom: 0;
         }
 
         .container-fluid {
@@ -222,7 +224,7 @@
                         <div class="modal-content">
                             <div class="modal-body">
                                 <a class="close" href="">&times;</a>
-                                <div class="content">
+                                <div class="content" style="margin-top: 2rem;">
                                     <a href="http://localhost:8000/app/feed">
                                         <p class="link" style="color: #009aeb; font-family: Titillium Web;">Home Feed</p>
                                     </a>

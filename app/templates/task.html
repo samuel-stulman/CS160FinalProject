@@ -415,7 +415,7 @@
     function addSubtask(id) {
         let subtaskID = parseId(id)
         console.log($(`#add-${subtaskID}`).text())
-        let username = localStorage.getItem('username')
+        let username = sessionStorage.getItem('username')
         if ($(`#add-${subtaskID}`).text().trim() != 'done' && username != null && username != undefined) {
             $(`#add-${subtaskID}`).text('done')
             $(`#add-${subtaskID}`).css('color', 'yellow')
@@ -442,7 +442,7 @@
             // Update user's storage
             // Fetch user data from localstorage
             let userdata = JSON.parse(localStorage.getItem(username))
-            // Store as a set
+            // Store as a list
             let todos = userdata.todos
             if (todos == undefined) {
                 todos = []
@@ -480,7 +480,7 @@
            let benefitHTML = createBenefit(benefit)
             $('#benefit-list').append(benefitHTML)
         })
-        let username = localStorage.getItem('username')
+        let username = sessionStorage.getItem('username')
         $('#chat-btn').attr('href', `./chat?chatRoomId=${task.chat_id}&username=${username ? username : 'Anonymous User'}`)
 
     }

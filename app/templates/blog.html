@@ -394,7 +394,7 @@
         // Display
         $('#task-header').text(blog.header)
         $('#blog-description').text(blog.description)
-        let username = localStorage.getItem('username')
+        let username = sessionStorage.getItem('username')
         $('#chat-btn').attr('href', `./chat?chatRoomId=${blog.chat_id}&username=${username ? username : 'Anonymous User'}`)
     }
     

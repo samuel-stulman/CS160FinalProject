@@ -55,3 +55,6 @@ def task(request):
 
 def blog(request):
     return render(request, 'blog.html')
+
+def recommendeduser(request):
+    return render(request, 'recommendeduser.html')

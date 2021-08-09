@@ -21,5 +21,6 @@ urlpatterns = [
     path('register4', views.register4, name='register4'),
     path('chat', views.chat, name='chat'),
     path('task', views.task, name='task'),
-    path('blog', views.blog, name='blog')
+    path('blog', views.blog, name='blog'),
+    path('recommend', views.recommendeduser, name='recommended users')
 ]

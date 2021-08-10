@@ -169,7 +169,7 @@
             text-align: center;
             line-height: 60px;
             border-radius: 25px;
-            margin-left: 10px;
+            margin-left: 5px;
         }
 
         #task-date {
@@ -177,6 +177,18 @@
             font-size: 20px;
             height: 60px;
             width: 150px;
+            background-color: #2F472F;
+            text-align: center;
+            line-height: 60px;
+            border-radius: 25px;
+            margin-left: 5px;
+        }
+
+        #task-location {
+            float: right;
+            font-size: 18px;
+            height: 60px;
+            width: 250px;
             background-color: #2F472F;
             text-align: center;
             line-height: 60px;
@@ -367,12 +379,20 @@
             </div>
             <br /><br /><br />
             <div style="margin-left: 2%; margin-right: 2%;">
-                <h1 style="color: white; font-weight: bold; float: left;" id="task-header">Task: something</h1>
+                <h1 style="color: white; font-weight: bold; float: left;" id="task-header">Task:</h1>
                 <div id="task-time">
 
                 </div>
                 <div id="task-date">
-                    dasdsadasdasdsa
+                    
+                </div>
+            </div>
+
+            <div style="margin-left: 2%; margin-right: 2%; margin-top: 4em;">
+                <h2 style="color: white; font-weight: bold; float: left;" id="task-header">Decription:</h2>
+
+                <div id="task-location">
+                    
                 </div>
             </div>
             <br />
@@ -380,9 +400,7 @@
             <br />
 
             <div class="form-container">
-                <div id="photo-upload">
-                    Photo
-                </div>
+                <img id="photo-upload" src="https://cdn.lifestyleasia.com/wp-content/uploads/sites/2/2020/02/25145253/Photo-by-Alfons-Morales-on-Unsplash-scaled-1535x900.jpg">
                 <div id="task-description">
 
                 </div>
@@ -444,7 +462,6 @@
 
     function addSubtask(id) {
         let subtaskID = parseId(id)
-        console.log($(`#add-${subtaskID}`).text())
         let username = sessionStorage.getItem('username')
         if ($(`#add-${subtaskID}`).text().trim() != 'done' && username != null && username != undefined) {
             $(`#add-${subtaskID}`).text('done')
@@ -498,6 +515,7 @@
         $('#task-description').text(task.description)
         $('#task-time').text(`${task.start_time + '-' + task.end_time}`)
         $('#task-date').text(task.date)
+        $('#task-location').text(task.location.location)
         let subtaskid = 1
         $('#num-subtasks').text('Subtasks List - ' + task.subtasks.length)
         task.subtasks.forEach(subtask => {

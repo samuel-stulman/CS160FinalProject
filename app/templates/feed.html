@@ -232,7 +232,7 @@ body {
     </style>
 
 </head>
-<body>
+<body style="background-image:url('https://i.ibb.co/WpdGbd6/Screen-Shot-2021-08-09-at-5-09-09-PM.png'); background-size: 100% 100%;">
     <div class="outer-wrapper">
         <div class="top-nav-bar">
             <div style="color: white; font-size: 2rem; width: 33%; font-family: 'Quando', serif; margin-left: 2%; margin-top: 1%; float: left">
@@ -363,7 +363,7 @@ body {
         if (post.type == 'Task') {
             let postHTML = `<div class="feed-post">
                 <p style="float: left;">(${post.posted_time}) ${post.author} posted:</p>
-                <p style="float: right;">${post.date}, ${post.start_time} - ${post.end_time} | Within 5 miles</p>
+                <p style="float: right;">${post.date}, ${post.start_time} - ${post.end_time} | ${post.location.location}</p>
                 <br/>
                 <br/>
                 <div class="post-container">

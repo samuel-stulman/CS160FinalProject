@@ -35,7 +35,7 @@
         }
 
         #photo-upload {
-            height: 20vh;
+            height: 21vh;
             width: 35vw;
             background-color: #c4c4c4;
             display: block;
@@ -180,7 +180,7 @@
 
         #success-modal {
             height: 400px;
-            width: 500px;
+            width: 600px;
             background-color: #5dc05d;
             text-align: center;
             margin: 0 auto;
@@ -198,7 +198,7 @@
 
         .modal-btn {
             height: 50px;
-            width: 200px;
+            width: 250px;
             padding: 15px;
             border-radius: 5px;
             background-color: green;
@@ -378,6 +378,12 @@
                 </div>
                 <input type="text" class="form-control textinput" id="task-header" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
             </div>
+            <div style="margin-top: 1em;" class="input-group input-group-lg textinput-container">
+                <div class="input-group-prepend">
+                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Location: </span>
+                </div>
+                <input type="text" class="form-control textinput" id="task-location" aria-label="Large" placeholder="address, city, state, zip code" aria-describedby="inputGroup-sizing-sm">
+            </div>
             <div class="input-group input-group-lg textinput-container-long">
                 <div class="input-group-prepend">
                   <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Description: </span>
@@ -447,8 +453,8 @@
                     <a class="modal-btn" href="./feed" style="float: left; background-color: yellowgreen;">
                         Return to Feed
                     </a>
-                    <a class="modal-btn" onclick="location.reload()" style="float: right;">
-                        Create another post
+                    <a class="modal-btn" href="./recommend" style="float: right;">
+                        Recommended Helpers
                     </a>
                 </div>
                 
@@ -467,12 +473,6 @@
     var latitude = 40.714224; // Hard coded values
     const apikey = 'AIzaSyCja2930U2Z83-qQdaHxK2qrh9f770jpq4'
     // Get user's geolocation long lat
-    navigator.geolocation.getCurrentPosition(pos => {
-        console.log('client longitude ' + pos.coords.longitude)
-        console.log('client latitude ' + pos.coords.latitude)
-        longitude = pos.coords.longitude
-        latitude = pos.coords.latitude
-    });        
     let TASK_TAGS = ['baby-sitting', 'pet-sitting', 'moving furniture', 'assembling furniture', 
     'tutoring for hw', 'doing chores', 'security',
      'company', 'computer', 'gardening', 'programming', 'music', 'tutor', 'seniors', 'health', 'community', 'animals'] // TODO
@@ -499,14 +499,45 @@
         console.log(selected_tags)
        
     }
+    var taskLocation = {
+        lat: 0,
+        long: 0,
+        location: ''
+    }
 
     let numTasks = 1
     let numBenefits = 1
     // One - Off
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apikey}`).then(resp => resp.json()).then(data => {
-        console.log(data) 
-        // Process location
+    $('#task-location').focusout(() => {
+        let userLocation = $('#task-location').val()
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${userLocation}&key=${apikey}`).then(resp => resp.json()).then(data => {
+            if (data.status == 'OK') {
+                //console.log('ok')
+                let addressData = data.results[0]
+                let coords = addressData.geometry.location
+                let city = ''
+                let state = ''
+                let address_components = addressData.address_components
+                address_components.forEach(comp => {
+                    if (comp.types.includes('locality')) {
+                        city = comp.long_name
+                    } else if (comp.types.includes('administrative_area_level_1')) {
+                        state = comp.short_name
+                    }
+                })
+                console.log(coords)
+                taskLocation.lat = coords.lat
+                taskLocation.long = coords.lng
+                taskLocation.location = city + ', ' + state
+                console.log(taskLocation)
+                $('#task-location').val(addressData.formatted_address)
+            } else {
+                console.log('invalid address')
+            }
+        })    
     })
+
+
     
     function createNewSubTask(id) {
         let task = `<div class="task-item" id="task-item-${id}">
@@ -584,7 +615,7 @@
         } else if (hour == 12) {
             return `12: ${minute} ${timeOfDay}`
         }
-        return `${hour % 12}: ${minute} ${timeOfDay}`
+        return `${hour % 12}:${minute} ${timeOfDay}`
     }
 
 
@@ -628,15 +659,21 @@
             $('#error').show()
             return false
         }
+        // Check location
+        if (taskLocation.location == '') {
+            $('#error').text("invalid address")
+            $('#error').show()
+            return false
+        }
         // Check if the user is real
         if (sessionStorage.getItem('username') == null || sessionStorage.getItem('username')== undefined) {
             $('#error').text("unauthorized access")
             $('#error').show()
             return false
         }
+        
         $('#error').hide()
         return true
-
     }
 
 
@@ -682,6 +719,7 @@
                 posted_time: getPostedDate(),
                 task_tags: Array.from(selected_tags),
                 chat_id: 'room' + uid,
+                location: taskLocation,
                 author: sessionStorage.getItem('username')// Store the author of the post
             }
             var posts = []

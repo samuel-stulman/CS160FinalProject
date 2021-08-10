@@ -736,6 +736,7 @@
             posts.push(task)
             localStorage.setItem('posts', JSON.stringify(posts))
             $('#success-modal').show()
+            socket.send(JSON.stringify(task)) 
         }
         //localStorage.setItem('task_' + uid.toString, task)
         //TODO: Broadcast to websocket the new task

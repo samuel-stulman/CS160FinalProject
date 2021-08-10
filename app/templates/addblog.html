@@ -440,7 +440,7 @@
 
     function getPostedDate() {
         let d = new Date()
-        let month = d.getMonth().toString() + 1
+        let month = (d.getMonth() + 1).toString() 
         let day = d.getDate().toString()
         let year = d.getFullYear().toString()
         let militaryHour = d.getHours()

@@ -229,6 +229,16 @@ body {
                 width: 70%;
             }
         }
+
+        .modal-btn {
+            height: 50px;
+            width: 250px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: green;
+            color:white;
+            text-decoration: none;
+        }
     </style>
 
 </head>
@@ -334,7 +344,28 @@ body {
                 <br/>
                 <h1>Empty Feed</h1>
             </div>
+        </div>
+        <div id="success-modal" style="height: 500px; width: 600px; background-color: #5dc05d; text-align: center; margin: 0 auto; margin-top: 20%; top: 0; position: fixed; left: 50%; margin-left: -300px; border-radius: 15px; padding: 15px; -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);">
+            <h1>There is a new help request near you!</h1>
+            <br/>
+            <div style="background-color: #429B3C; height: 75px; width: 500px; margin: 0 auto; border-radius: 15px; text-align: left; line-height: 75px; padding-left: 20px; padding-right: 20px;">
+                <p>Task</p>
+            </div>
+            <br/>
+            <div style="background-color: #429B3C; height: 75px; width: 500px; margin: 0 auto; border-radius: 15px; text-align: left; line-height: 75px; padding-left: 20px; padding-right: 20px;">
+                <p>Description</p>
+            </div>
+            <br/>
 
+            <div style="width: 100%; padding-left: 25px; padding-right: 25px; margin-top: 1em;">
+                <a class="modal-btn" href="dismissLocationPopUp()" style="float: left; background-color: yellowgreen; height: 50px; width: 250px; padding: 15px; border-radius: 5px;color:white; text-decoration: none;">
+                    Dismiss
+                </a>
+                <a class="modal-btn" href="./recommend" style="float: right; height: 50px; width: 250px; padding: 15px; border-radius: 5px; background-color: green; color:white; text-decoration: none;">
+                    I want to help!
+                </a>
+            </div>
+            
         </div>
     
 </body>
@@ -349,6 +380,8 @@ body {
         var posts = JSON.parse(localStorage.getItem('posts'))
         console.log(posts)
     }
+
+    $('#success-modal').hide()
 
     function createTag(tag) {
         return `<div class="list-item"> +
@@ -417,5 +450,69 @@ body {
         document.getElementById('community-select').appendChild(val)
     }
 
+    // CODE FOR LOCATION-BASED POP UP
+
+    function dismissLocationPopUp() {
+        $('#location-modal').remove()
+    }
+
+
+    socket.onmessage = function(receivedMessage) {
+        var task = JSON.parse(receivedMessage.data);
+        let userdata = JSON.parse(localStorage.getItem(sessionStorage.getItem('username')))
+        console.log(userdata)
+        let userLocation = userdata.coordinates
+        console.log(userLocation)
+        let userLong = userLocation.longitude
+        console.log(userLong)
+        let userLat = userLocation.latitude
+        let jobLong = task.location.long
+        let jobLat = task.location.lat
+
+        const WITHIN_RADIUS = 5 // ADJUST AS NEEDED
+
+        function withInDistance(radius) {
+            if (userLong <= jobLong + radius && jobLong - radius <= userLong) {
+                if (userLat <= jobLat + radius && jobLat - radius <= userLat) {
+                    return true
+                }
+            }
+            return false
+        }
+
+        function createNewJobPopUp(task) {
+            let popup = `<div id="location-modal" style="height: 500px; width: 700px; background-color: #5dc05d; text-align: center; margin: 0 auto; margin-top: 10%; top: 0; position: fixed; left: 50%; margin-left: -350px; border-radius: 15px; padding: 25px; padding-top: 25px; -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);">
+            <h1>There is a new help request near you!</h1>
+            <br/>
+            <div style="background-color: #429B3C; height: 75px; width: 200px; margin: 0 auto; border-radius: 15px; text-align: left; line-height: 75px; padding-left: 20px; padding-right: 20px; float: left;">
+                <p style="font-size: 28px;">${task.date}</p>
+            </div>
+            <div style="background-color: #429B3C; height: 75px; margin: 0 auto; border-radius: 15px; text-align: left; line-height: 75px; padding-left: 20px; padding-right: 20px; float: right;">
+                <p style="font-size: 28px;">${task.start_time} - ${task.end_time}</p>
+            </div>
+            <div style="background-color: #429B3C; height: 75px; width: 100%; border-radius: 15px; text-align: left; line-height: 75px; padding-left: 20px; padding-right: 20px; margin-top: 6em;">
+                <p style="font-size: 28px;">${task.header}</p>
+            </div>
+            <div style="background-color: #429B3C; height: 75px; width: 100%; border-radius: 15px; text-align: left; line-height: 75px; padding-left: 20px; padding-right: 20px; margin-top: 1em">
+                <p style="font-size: 24px;">${task.description}</p>
+            </div>
+            <br/>
+
+            <div style="width: 100%; padding-left: 25px; padding-right: 25px; margin-top: 1em;">
+                <a class="modal-btn" onclick="dismissLocationPopUp()" style="font-size: 18px; float: left; background-color: yellowgreen; height: 60px; width: 250px; padding: 15px; border-radius: 5px;color:white; text-decoration: none;">
+                    Dismiss
+                </a>
+                <a class="modal-btn" href="./task?id=${task.id}" style="font-size: 18px; float: right; height: 60px; width: 250px; padding: 15px; border-radius: 5px; background-color: green; color:white; text-decoration: none;">
+                    I want to help!
+                </a>
+            </div>
+            
+            </div>`
+            $('body').append(popup)
+        }
+        if (withInDistance(WITHIN_RADIUS)) {
+            createNewJobPopUp(task)
+        }
+    }
 </script>
 </html>

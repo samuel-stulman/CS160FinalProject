@@ -18,6 +18,8 @@
         body {
             background-color: #439B3B;
             font-family: 'Titillium Web', sans-serif;
+            background: url("https://i.ibb.co/BjcP77Z/Screen-Shot-2021-08-07-at-9-11-34-PM.png") no-repeat center center fixed;
+            background-size: cover;
         }
 
         .row.app-name p {
@@ -283,7 +285,6 @@
         Note: For sender class should have sender for message and recive for message
         Note: For sender class should have sender for message and recive for message
     */
-
     /*
         Data Structure use is {
             roomID -> [{
@@ -307,7 +308,11 @@
     var senderMessageTag = "<div class='send row justify-content-end'><h2>"
     var reciverTag = "<div class='row justify-content-start other'><h1>";
     var rexiverMessageTag = "<div class='recive row justify-content-start'><h2>";
-
+    
+    let back = () => {
+        window.location = document.referrer;
+    }
+    
     function onLoad() {
         if (chats != null) {
             chats = JSON.parse(chats);

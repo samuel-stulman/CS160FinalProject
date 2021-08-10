@@ -241,9 +241,6 @@ body {
             <div style="width: 33%; float: left;">
                 <select id="community-select" class="form-select" aria-label="Default select example">
                     <option selected>Communities</option>
-                    <option value="1">Berkeley, CA</option>
-                    <option value="2">UC Berkeley</option>
-                    <option value="3">The Daily Californian </option>
                 </select>
             </div>
             <div style="float:right; margin-right: 20px;">
@@ -410,6 +407,14 @@ body {
     } else {
         // Display empty feed
         $('#empty-feed').show()
+    }
+
+    user = JSON.parse(sessionStorage.getItem(sessionStorage.getItem('username')))
+    for (let i = 0; i < user['communities'].length; i++) {
+        let val = document.createElement('option')
+        val.value = i+1
+        val.innerHTML = user['communities'][i]
+        document.getElementById('community-select').appendChild(val)
     }
 
 </script>

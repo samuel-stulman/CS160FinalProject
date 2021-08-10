@@ -187,9 +187,8 @@
         </div>
         <div
             style="display: flex; justify-content: center; align-items: center; margin-top: 1%; float:left; width: 80%">
-            <div
-                style="background-color: #2F472F; width: 70%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; margin-left:-20%">
-                Berkeley, CA 94706
+            <div id="location" style="background-color: #2F472F; width: 70%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; margin-left:-20%">
+                
             </div>
         </div>
     </div>
@@ -229,16 +228,14 @@
         </div>
         <div
             style="display: flex; justify-content: center; align-items: center; margin-top: 1%; float:left; width: 75%">
-            <div
-                style="background-color: #2F472F; width: 70%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; margin-left:-20%">
-                charlesmontthefirst
+            <div id= "username" style="background-color: #2F472F; width: 70%; font-size: 48px; font-family: 'Titillium Web'; color: white; border-radius: 20px; text-align: center; margin-left:-20%">
+                
             </div>
         </div>
     </div>
 
     <div style="margin-top:5%">
-        <div
-            style="color: white; font-size: 48px; font-family: 'Titillium Web'; margin-left: 2%; margin-top: 1%; float:left">
+        <div style="color: white; font-size: 48px; font-family: 'Titillium Web'; margin-left: 2%; margin-top: 1%; float:left">
             Change Password:
         </div>
         <div
@@ -265,6 +262,49 @@
     var uid = Date.now() % 10000; // Use this to ID the user
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/chat');
+
+    user = JSON.parse(sessionStorage.getItem(sessionStorage.getItem('username')))
+    var username = document.createElement('p')
+    username.innerHTML = user['username']
+    document.getElementById('username').appendChild(username)
+
+
+    const apikey = 'AIzaSyCja2930U2Z83-qQdaHxK2qrh9f770jpq4'
+    var taskLocation = {
+        lat: 0,
+        long: 0,
+        location: ''
+    }
+
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${user['coordinates']['latitude']},${user['coordinates']['longitude']}&key=${apikey}`).then(resp => resp.json()).then(data => {
+            if (data.status == 'OK') {
+                //console.log('ok')
+                let addressData = data.results[0]
+                let coords = addressData.geometry.location
+                let city = ''
+                let state = ''
+                let address_components = addressData.address_components
+                address_components.forEach(comp => {
+                    if (comp.types.includes('locality')) {
+                        city = comp.long_name
+                    } else if (comp.types.includes('administrative_area_level_1')) {
+                        state = comp.short_name
+                    }
+                })
+                console.log(addressData)
+                taskLocation.lat = coords.lat
+                taskLocation.long = coords.lng
+                taskLocation.location = city + ', ' + state
+                console.log(taskLocation)
+                var loc = document.createElement('p')
+                loc.innerHTML = taskLocation.location
+                document.getElementById('location').appendChild(loc)
+
+            } else {
+                console.log('invalid address')
+            }
+        })    
+
 
 </script>
 

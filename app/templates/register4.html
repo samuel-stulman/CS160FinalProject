@@ -60,7 +60,7 @@
         }
 
         .form-group {
-            height: 20vh;
+            height: 15vh;
         }
 
         .row.form {
@@ -106,10 +106,46 @@
             font-size: 2rem;
         }
 
+        /* #location {
+            width: 45rem;
+            height: 5rem;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid black;
+            margin-left: 0;
+            color: white;
+            font-size: 2rem;
+        } */
+
         .row.back-forward {
             position: absolute;
             bottom: 2rem;
             width: 100%;
+        }
+
+        .form-check {
+            text-align: center;
+            height: 10vh;
+            padding-top: 2rem;
+        }
+
+        input[type=checkbox] {
+            transform: scale(2);
+            padding-right: 10rem;
+        }
+
+        .form-check-label-yes {
+            padding-left: 2rem;
+            color: #2F472F;
+            display: inline;
+            font-size: 1.5rem;
+        }
+
+        .form-check-label-no {
+            padding-left: 2rem;
+            color: red;
+            display: inline;
+            font-size: 1.5rem;
         }
 
     </style>
@@ -143,12 +179,29 @@
                     <label class="control-label" for="date" id="bday"> Birth Date:</label>
                     <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
                 </div>
-                
     
                 <div class="form-group">
                     <label for="bioInput" class="personal" id="bio">Bio:</label>
                     <input type="text" class="form-control" id="bioInput" placeholder="Enter Bio">
                 </div>
+
+                <div class="form-group">
+                    <label for="locationInput" class="personal" id="location">Allow Location?</label>
+                    <div class="row text-center location-input" style="vertical-align: middle;">
+                        <div class="col-sm-6">
+                            <div row="row yes"  onclick="getLocation()" style="width: 10rem; height: 100%; border-radius: 20px; margin-left:auto;margin-right:auto; background-color: #2F472F;">
+                                <p style="color: white; font-size: 2rem; font-family: 'Titillium Web', sans-serif;">Yes</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div row="row no" style="width: 10rem; height: 100%; border-radius: 20px; margin-left:auto;margin-right:auto; background-color: red;">
+                                <p style="color: white; font-size: 2rem; font-family: 'Titillium Web', sans-serif;">No</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
             </form>
         </div>
         
@@ -202,6 +255,7 @@
         var birthdate = document.getElementById("date").value
         var bio = document.getElementById("bioInput").value
         if (name != '' && birthdate != '' && bio != '') {
+            
             user = JSON.parse(sessionStorage.getItem(sessionStorage.getItem('username')))
             user['name'] = name
             user['birthdate'] = birthdate
@@ -236,6 +290,19 @@
       };
       date_input.datepicker(options);
     })
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((pos)=>{
+                console.log('client longitude ' + pos.coords.longitude)
+                console.log('client latitude ' + pos.coords.latitude)
+                user = JSON.parse(sessionStorage.getItem(sessionStorage.getItem('username')))
+                user['coordinates'] = {'longitude': pos.coords.longitude, 'latitude': pos.coords.latitude}
+                localStorage.setItem(sessionStorage.getItem('username'), JSON.stringify(user))
+                sessionStorage.setItem(sessionStorage.getItem('username'), JSON.stringify(user))
+            });
+        }
+    }
 
     document.getElementById("register-confirm").innerHTML = "Hello " + sessionStorage.getItem('username') + ", <br><br>Please press the register button to confirm all the information you entered is correct. Welcome to Auxilium!<br><br>"
 </script>

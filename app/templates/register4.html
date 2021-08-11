@@ -98,7 +98,7 @@
 
         #bioInput {
             width: 40rem;
-            height: 5rem;
+            height: 7rem;
             margin-left: auto;
             margin-right: auto;
             background-color: #2F472F;
@@ -182,10 +182,12 @@
     
                 <div class="form-group">
                     <label for="bioInput" class="personal" id="bio">Bio:</label>
-                    <input type="text" class="form-control" id="bioInput" placeholder="Enter Bio">
+                    <!-- <input type="text" class="form-control" id="bioInput" placeholder="Enter Bio"> -->
+                    <textarea class="form-control" id="bioInput" aria-label="With textarea"></textarea>
                 </div>
+                
 
-                <div class="form-group">
+                <div class="form-group" style="padding-top: 2rem;">
                     <label for="locationInput" class="personal" id="location">Allow Location?</label>
                     <div class="row text-center location-input" style="vertical-align: middle;">
                         <div class="col-sm-6">

@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap"
         rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style type="text/css">
         body {
@@ -66,6 +67,7 @@
         .textinput-label {
             background-color: #2F472F;
             color: white;
+            font-weight: bold;
             border-color: transparent;
         }
 
@@ -104,6 +106,7 @@
         #tag-list {
             height: 20vh;
             width: 100%;
+            margin-top: 10px;
         }
 
         #blog-heading::placeholder {
@@ -153,11 +156,10 @@
             background-color: #2F472F;
             border-color: transparent;
             display: block;
-            font-size: 32px;
             text-align: center;
             float: right;
             color: white;
-            text-decoration: none;
+            font-weight: normal;
         }
 
         #success-modal {
@@ -249,6 +251,16 @@
                 width: 70%;
             }
         }
+
+        #blog-text {
+            background-color: #2F472F;
+            height: 200px;
+            color: white;
+            border-radius: 10px;
+            border-color: transparent;
+            resize: none;
+            padding: 10px;
+        }
     </style>
 
 </head>
@@ -337,6 +349,7 @@
                     </div>
                 </div>
             </div>
+        </div>
                 <br /><br /><br />
                 <h1 style="margin-left: 2%; color: white;">Add Blog Post</h1>
                 <div class="form-container">
@@ -353,24 +366,21 @@
                     </div>
                     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                     <div class="input-group input-group-lg textinput-container-long">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Add Text: </span>
-                        </div>
-                        <input type="text" id="blog-text" class="form-control textinput" aria-label="Large"
-                            aria-describedby="inputGroup-sizing-sm">
+                            <h2 style="width: 100%;">Blog Text:</h2>
+                            <br/>
+                            <textarea class="form-control" aria-label="With textarea" id="blog-text" ></textarea>
                     </div>
                     <br /> <br /> <br />
-                    <h2 style="float: left;">Community Tags</h2>
+                    <h2 style="float: left; width: 100%; margin-top: 1em;">Community Tags</h2>
                     <br />
                     <br />
                     <div id="tag-list">
                     </div>
-                    <div
-                        style="height: 74px; line-height: 74px; font-weight: bold; margin-left: 50px; margin-right: 50px;">
+                    <div style="height: 74px; line-height: 74px; font-weight: bold;margin-top: 5em;">
                         <p id="error" style="float: left; color: rgb(197, 67, 67);"></p>
                         <button type="button" id="create-blog-btn" class="btn btn-primary submit-btn">Submit</button>
                         <a href="https://www.wordstream.com/blog/ws/2015/02/09/how-to-write-a-blog-post"
-                            id="blog-tutorial-btn">See blog post tutorial</a>
+                           class="submit-btn" id="blog-tutorial-btn">See blog post tutorial</a>
 
                     </div>
                     <div id="success-modal">

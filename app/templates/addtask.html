@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quando&family=Titillium+Web:wght@300&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style type="text/css">
         body {
@@ -61,6 +62,7 @@
         .textinput-label {
             background-color: #2F472F;
             color: white;
+            font-weight: bold;
             border-color: transparent;
         }
 
@@ -174,8 +176,9 @@
         }
 
         #tag-list {
-            height: 20vh;
+            height: 300px;
             width: 100%;
+            display: block;
         }
 
         #success-modal {
@@ -264,6 +267,14 @@
                 width: 70%;
             }
         }
+
+        #task-description {
+            height: 200px;
+            background-color: #2F472F ;
+            border-color: transparent;
+            color: white;
+            border-radius: 10px;
+        }
     </style>
 
 </head>
@@ -350,8 +361,9 @@
                     </div>
                 </div>
             </div>
+        </div>
         <br/><br/><br/>
-        <h1 style="margin-left: 2%; color: white; font-weight: bold;">Request Help</h1>
+        <h1 style="margin-left: 2%; color: white; ">Request Help</h1>
         <div class="form-container">
             <div id="photo-upload">
                 <img src="https://static.thenounproject.com/png/1967620-200.png" height="100" width="100">
@@ -385,10 +397,9 @@
                 <input type="text" class="form-control textinput" id="task-location" aria-label="Large" placeholder="address, city, state, zip code" aria-describedby="inputGroup-sizing-sm">
             </div>
             <div class="input-group input-group-lg textinput-container-long">
-                <div class="input-group-prepend">
-                  <span class="input-group-text textinput-label" id="inputGroup-sizing-lg">Description: </span>
-                </div>
-                <input type="text" class="form-control textinput" id="task-description" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                <h2 style="width: 100%;">Description:</h2>
+                <br/>
+                <textarea class="form-control" aria-label="With textarea" id="task-description" ></textarea>
             </div>
             <br/> <br/>
             <h2 style="width: 100%; margin-top: 1em; float: left; display: block;">Task Tags</h2>
@@ -397,6 +408,7 @@
             <div id="tag-list">
             </div>
             <br/>            <br/>            <br/>
+            <br/>             <br/>   <br/>            <br/>
             <br/>             <br/>   <br/>            <br/>
             <h2 style="float: left; margin-top: 1em;">Subtasks</h2>
             <div style="margin-top: 2em" class="new-subtask-btn">
@@ -442,7 +454,7 @@
             <br/>
             <br/>
             <br/>
-            <div style="height: 74px; line-height: 74px; font-weight: bold;">
+            <div style="height: 75px; line-height: 75px; font-weight: bold; padding-bottom: 50px;">
                 <p id="error" style="float: left; color: rgb(197, 67, 67);"></p>
                 <button type="button" id="create-task-btn" class="btn btn-primary submit-btn">Submit</button>
             </div>
@@ -459,8 +471,6 @@
                 </div>
                 
             </div>
-            
-        </div>
     </div>
 
 </body>
